@@ -1,0 +1,3 @@
+## add these lines to prevent search engines from indexing your site while it's under development
+User-agent: *
+Disallow: /
