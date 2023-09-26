@@ -1,0 +1,9 @@
+{
+  "*.{ts,tsx}": [
+    "tsc --noEmit --esModuleInterop --jsx preserve",
+    "eslint --fix",
+    "prettier --write"
+  ],
+  "*.js": ["eslint --fix", "prettier --write"],
+  "*.json": ["prettier --write"]
+}
