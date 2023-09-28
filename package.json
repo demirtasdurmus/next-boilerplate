@@ -10,7 +10,7 @@
     "lint:fix": "next lint --fix",
     "format:write": "prettier --write . --cache",
     "format:check": "prettier --check . --cache",
-    "type-check": "tsc --noEmit --jsx preserve",
+    "type-check": "tsc -p tsconfig.json --noEmit",
     "drizzle:studio": "drizzle-kit studio",
     "drizzle:generate": "drizzle-kit generate:pg",
     "drizzle:migrate": "ts-node --transpile-only ./src/app/api/_db/scripts/migrate.ts",

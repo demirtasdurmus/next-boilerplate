@@ -1,6 +1,6 @@
 {
   "*.{ts,tsx}": [
-    "tsc --noEmit --esModuleInterop --jsx preserve",
+    "bash -c tsc -p tsconfig.json --noEmit",
     "eslint --fix",
     "prettier --write"
   ],

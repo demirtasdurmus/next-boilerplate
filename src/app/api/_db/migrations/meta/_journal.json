@@ -15,6 +15,20 @@
       "when": 1695619603993,
       "tag": "0001_complex_senator_kelly",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1695877388156,
+      "tag": "0002_natural_tiger_shark",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1695878476884,
+      "tag": "0003_milky_baron_strucker",
+      "breakpoints": true
     }
   ]
 }
