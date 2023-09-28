@@ -4,3 +4,4 @@ export const notFoundError = 'NOT_FOUND_ERROR';
 export const internalServerError = 'INTERNAL_SERVER_ERROR';
 export const unauthorizedError = 'UNAUTHORIZED_ERROR';
 export const forbiddenError = 'FORBIDDEN_ERROR';
+export const conflictError = 'CONFLICT_ERROR';
