@@ -7,7 +7,7 @@
     "prettier"
   ],
   "parserOptions": {
-    "project": "./tsconfig.json"
+    "project": ["./tsconfig.json", "./src/app/api/_db/scripts/tsconfig.json"]
   },
   "rules": {
     "import/prefer-default-export": "off",
