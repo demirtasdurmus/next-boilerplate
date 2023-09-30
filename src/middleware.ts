@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { cookies } from 'next/headers';
 import { AUTH_COOKIE } from './app/api/(modules)/auth/_constants/auth-cookie-name.constant';
 import { verifyJWT } from './app/api/(modules)/auth/_utils/verify-jwt.util';
 
@@ -9,7 +10,7 @@ export async function middleware(req: NextRequest) {
   const path = req.nextUrl.pathname;
   const isAuthPath = authPaths.includes(path);
   const isPrivatePath = privatePaths.includes(path);
-  const token = req.cookies.get(AUTH_COOKIE)?.value;
+  const token = cookies().get(AUTH_COOKIE)?.value;
 
   // if the incoming request is to a private path
   if (isPrivatePath) {
