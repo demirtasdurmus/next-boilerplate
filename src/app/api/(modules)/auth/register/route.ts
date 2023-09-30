@@ -37,7 +37,7 @@ async function registerHandler(
   return buildCreatedResponse({
     data: {},
     metadata: {
-      message: 'User registered successfully',
+      message: 'User register successful',
     },
   });
 }
