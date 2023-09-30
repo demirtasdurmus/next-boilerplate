@@ -16,7 +16,7 @@ export async function verifyJWT<T>(
       token,
       new TextEncoder().encode(process.env.JWT_SECRET),
     );
-    return { valid: true, data: data as T };
+    return { valid: true, data: data.payload as T };
   } catch (error) {
     return { valid: false, data: null };
   }
