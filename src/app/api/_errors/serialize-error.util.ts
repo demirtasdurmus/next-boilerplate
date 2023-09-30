@@ -1,11 +1,18 @@
+import { z } from 'zod';
 import { PostgresError } from 'postgres';
 import { BaseError } from './base.error';
 import { PgErrorCode } from './pg-error-code.enum';
 import { ConflictError } from './conflict.error';
 import { capitalizeInitialLetter } from '../_utils/capitalize-initial-letter.util';
 import { getUniqueColumnFromConstraintName } from '../_utils/get-unique-column-from-constraint-name';
+import { BadRequestError } from './bad-request.error';
 
 export function serializeError(error: any): BaseError {
+  // handle ZodErrors
+  if (error instanceof z.ZodError) {
+    const errorMessage = error.issues.map((issue) => issue.message).join(', ');
+    return new BadRequestError(errorMessage);
+  }
   // handle PostgresErrors
   if (error.name === 'PostgresError') {
     const _err = error as PostgresError;
