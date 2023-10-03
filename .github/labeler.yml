@@ -1,0 +1,36 @@
+###############################################################################
+# COMMON
+###############################################################################
+
+# Add 'root' label to any root file changes
+root:
+  - "*"
+  - .github/**
+  - .husky/**
+  - .vscode/**
+
+# Add 'env' label to any change to '.env.sample' files within the packages
+env:
+  - .env.sample
+
+# Add 'dependency' label to any change to 'package.lock' file
+dependency:
+  - package.lock
+
+# Add 'api' label to any change within the 'app/api'
+api:
+  - src/app/api/_errors/**
+  - src/app/api/_middlewares/**
+  - src/app/api/_routers/**
+  - src/app/api/_types/**
+  - src/app/api/_utils/**
+  - src/app/api/(modules)/**
+
+
+# # Add 'i18n' label to any change within the 'messages'
+# i18n:
+#   - messages/**
+
+# Add 'migration' label to any change within the 'server'
+migration:
+  - src/app/api/db/**
