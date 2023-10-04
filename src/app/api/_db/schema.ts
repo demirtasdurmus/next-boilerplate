@@ -16,7 +16,7 @@ export const users = pgTable('users', {
   username: text('username').notNull(),
   email: text('email').notNull().unique(),
   password: text('password').notNull(),
-  roles: jsonb('role').notNull().default(`["${Role.USER}"]`).$type<Role[]>(),
+  roles: jsonb('roles').notNull().default(`["${Role.USER}"]`).$type<Role[]>(),
   isVerified: boolean('is_verified').notNull().default(false),
   verificationToken: text('verification_token'),
   verificationTokenExpiresAt: date('verification_token_expires_at'),
