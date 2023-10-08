@@ -41,14 +41,14 @@ export default function Dialog({ title, onClose, onOk, children }: Props) {
       className="top-50 left-50 -translate-x-50 -translate-y-50 fixed z-10  rounded-xl backdrop:bg-gray-800/50"
     >
       {/* Flex wrapper Div */}
-      <div className="max-w-fullbg-gray-200 flex w-[500px] flex-col">
+      <div className="flex w-[500px] flex-col">
         {/* Title and Close Button */}
-        <div className="mb-4 flex flex-row justify-between bg-yellow-400 px-5 pt-2">
+        <div className="mb-4 flex flex-row justify-between bg-blue-200 px-5 pt-2">
           <h1 className="text-2xl">{title}</h1>
           <button
             onClick={closeDialog}
             type="button"
-            className="mb-2 h-8 w-8 cursor-pointer rounded border-none bg-red-600 px-2 py-1 font-bold text-white"
+            className="mb-2 h-8 w-8 cursor-pointer rounded border-none bg-red-600 px-2 py-1 font-bold text-white hover:bg-red-400"
           >
             X
           </button>
@@ -60,7 +60,7 @@ export default function Dialog({ title, onClose, onOk, children }: Props) {
             <button
               onClick={clickOk}
               type="button"
-              className="rounded border-none bg-green-500 px-2 py-1"
+              className="rounded border-none bg-green-500 px-2 py-1 font-bold text-white hover:bg-green-400"
             >
               OK
             </button>
