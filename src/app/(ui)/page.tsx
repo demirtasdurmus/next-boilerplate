@@ -1,41 +1,15 @@
+import Navbar from '@/components/navbar/navbar';
+import clsx from 'clsx';
 import Image from 'next/image';
 
 export default function Home() {
   return (
     <div>
       {/* Navbar */}
+      <Navbar />
       <nav className="container mx-auto p-6">
         {/* Flex container */}
         <div className="flex justify-between">
-          {/* Logo */}
-          <div className="pt-2">
-            <Image src="next.svg" width={150} height={150} alt="Logo" />
-          </div>
-          {/* Menu Items */}
-          <div className="hidden space-x-6 md:flex">
-            <a href="/pricing" className="hover:text-blue-400">
-              Pricing
-            </a>
-            <a href="/products" className="hover:text-blue-400">
-              Products
-            </a>
-            <a href="/about" className="hover:text-blue-400">
-              About
-            </a>
-            <a href="/careers" className="hover:text-blue-400">
-              Careers
-            </a>
-            <a href="/community" className="hover:text-blue-400">
-              Community
-            </a>
-          </div>
-          {/* Button */}
-          <a
-            href="/get-started"
-            className="baseline hidden rounded-full bg-red-400 p-3 px-6 pt-2 text-white hover:bg-red-200 md:block"
-          >
-            Get Started
-          </a>
           {/* Hamburger Icon */}
           <button
             id="menu-btn"
@@ -90,9 +64,12 @@ export default function Home() {
         <div className="md:w-1/2">
           <Image
             src="illustration-intro.svg"
-            width={590}
-            height={590}
+            width={0}
+            height={0}
             alt="Logo"
+            sizes="100vw"
+            className={clsx('h-full', 'w-10/12')}
+            priority
           />
         </div>
       </section>
@@ -301,8 +278,10 @@ export default function Home() {
               <Image
                 src="/next-white.svg"
                 alt="logo"
-                width={200}
-                height={200}
+                width={0}
+                height={0}
+                sizes="100vw"
+                className={clsx('h-full', 'w-40')}
               />
             </div>
             {/* Socials */}
