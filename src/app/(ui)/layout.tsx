@@ -22,10 +22,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Props) {
   return (
-    <html
-      lang="en"
-      className={clsx(fontNunito.variable, 'font-sans', 'bg-gray-200')}
-    >
+    <html lang="en" className={clsx(fontNunito.variable, 'font-sans')}>
       <body>
         {children}
         <ToastContainer />
