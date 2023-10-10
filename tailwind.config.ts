@@ -33,6 +33,9 @@ const config: Config = {
         purple: colors.purple,
         gray: colors.gray,
       },
+      fontFamily: {
+        sans: ['var(--font-nunito)'],
+      },
     },
   },
   plugins: [],
