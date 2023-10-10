@@ -1,3 +1,13 @@
 {
-  "cSpell.words": ["commitlint", "Rollbar", "tailwindcss", "toastify"]
+  "cSpell.words": [
+    "clsx",
+    "commitlint",
+    "nunito",
+    "Rollbar",
+    "tailwindcss",
+    "toastify"
+  ],
+  "tailwindCSS.experimental.classRegex": [
+    ["clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
+  ]
 }
