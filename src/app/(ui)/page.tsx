@@ -1,3 +1,4 @@
+import Footer from '@/components/footer';
 import Navbar from '@/components/navbar';
 import clsx from 'clsx';
 import Image from 'next/image';
@@ -233,120 +234,7 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-darkBlue">
-        {/* Flex Container */}
-        <div className="container mx-auto flex flex-col-reverse justify-between space-y-8 px-6 py-10 md:flex-row md:space-y-0">
-          {/* Logo and Socials */}
-          <div className="flex flex-col-reverse items-center justify-between space-y-12 md:flex-col md:items-start md:space-y-0">
-            {/* Copy Right in small screens */}
-            <div className="mx-auto my-6 text-center text-white md:hidden">
-              Copyright &copy; 2023 All rights reserved.
-            </div>
-            {/* Logo */}
-            <div>
-              <Image
-                src="/next-white.svg"
-                alt="logo"
-                width={0}
-                height={0}
-                sizes="100vw"
-                className={clsx('h-full', 'w-40')}
-              />
-            </div>
-            {/* Socials */}
-            <div className="flex justify-center space-x-4">
-              {/* Link 1 */}
-              <Image
-                src="/icon-facebook.svg"
-                alt="facebook"
-                width={30}
-                height={30}
-              />
-              {/* Link 2 */}
-              <Image
-                src="/icon-youtube.svg"
-                alt="youtube"
-                width={30}
-                height={30}
-              />
-              {/* Link 3 */}
-              <Image
-                src="/icon-twitter.svg"
-                alt="twitter"
-                width={30}
-                height={30}
-              />
-              {/* Link 4 */}
-              <Image
-                src="/icon-pinterest.svg"
-                alt="pinterest"
-                width={30}
-                height={30}
-              />
-              {/* Link 5 */}
-              <Image
-                src="/icon-instagram.svg"
-                alt="instagram"
-                width={30}
-                height={30}
-              />
-            </div>
-          </div>
-          {/* List Container */}
-          <div className="flex justify-around space-x-32">
-            {/* List Left */}
-            <div className="flex flex-col space-y-3 text-white">
-              <a href="/home" className="hover:text-red-200">
-                Home
-              </a>
-              <a href="/pricing" className="hover:text-red-200">
-                Pricing
-              </a>
-              <a href="/products" className="hover:text-red-200">
-                Products
-              </a>
-              <a href="/about" className="hover:text-red-200">
-                About
-              </a>
-            </div>
-            {/* List Right */}
-            <div className="flex flex-col space-y-3 text-white">
-              <a href="/careers" className="hover:text-red-200">
-                Careers
-              </a>
-              <a href="/community" className="hover:text-red-200">
-                Community
-              </a>
-              <a href="/privacy-policy" className="hover:text-red-200">
-                Privacy Policy
-              </a>
-            </div>
-          </div>
-
-          {/* Input Container */}
-          <div className="flex flex-col justify-between">
-            <form action="">
-              <div className="flex space-x-3">
-                <input
-                  type="text"
-                  className="flex-1 rounded-full px-4 focus:outline-none"
-                  placeholder="Updates your inbox"
-                />
-                <button
-                  className="rounded-full bg-red-400 px-6 py-2 text-white hover:bg-red-200 focus:outline-none"
-                  type="submit"
-                >
-                  Go
-                </button>
-              </div>
-            </form>
-            {/* Copy right in larger screens */}
-            <div className="hidden text-white md:block">
-              Copyright &copy; 2023 All rights reserved.
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </>
   );
 }
