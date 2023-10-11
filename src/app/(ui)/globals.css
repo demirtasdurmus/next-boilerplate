@@ -2,11 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+/* analyzed */
 body {
   background-image: url('/bg-tablet-pattern.svg');
-  background-repeat: no-repeat;
-  background-size: 800px;
-  background-position: 90% -25%;
+  background-size: 900px;
+  background-position: 70% -40%;
 }
 
 #cta {
@@ -15,6 +15,7 @@ body {
 }
 
 @media (max-width: 576px) {
+  /* analyzed */
   body {
     background-position: 50px -50px;
     background-size: 500px;
@@ -26,27 +27,31 @@ body {
 }
 
 /* Hamburger Menu */
+/* analyzed */
 .hamburger {
+  top: 9px;
   cursor: pointer;
   width: 24px;
   height: 24px;
-  transition: all 0.25s;
+  transition: all 0.15s;
   position: relative;
 }
 
+/* analyzed */
 .hamburger-top,
 .hamburger-middle,
 .hamburger-bottom {
   position: absolute;
   top: 0;
   left: 0;
-  width: 24px;
-  height: 2px;
+  width: 30px;
+  height: 3px;
   background: #000;
   transform: rotate(0);
   transition: all 0.5s;
 }
 
+/* The below class names are for toggling between hamburger and cross */
 .hamburger-middle {
   transform: translateY(7px);
 }

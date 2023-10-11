@@ -1,11 +1,10 @@
-import clsx from 'clsx';
 import Link from 'next/link';
 import Image from 'next/image';
 import React from 'react';
 
-export default function Logo() {
+export default function CompanyLogo() {
   return (
-    <div className={clsx('pt-2')}>
+    <div className="pt-2">
       <Link href="/">
         <Image
           src="/next.svg"
@@ -13,7 +12,7 @@ export default function Logo() {
           height={0}
           alt="next-logo"
           sizes="100vw"
-          className={clsx('h-auto', 'w-32')}
+          className="h-auto w-32"
         />
       </Link>
     </div>

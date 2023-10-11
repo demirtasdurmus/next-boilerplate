@@ -1,43 +1,12 @@
-import Navbar from '@/components/navbar/navbar';
+import Navbar from '@/components/navbar';
 import clsx from 'clsx';
 import Image from 'next/image';
 
 export default function Home() {
   return (
-    <div>
+    <>
       {/* Navbar */}
       <Navbar />
-      <nav className="container mx-auto p-6">
-        {/* Flex container */}
-        <div className="flex justify-between">
-          {/* Hamburger Icon */}
-          <button
-            id="menu-btn"
-            className="hamburger block focus:outline-none md:hidden"
-            type="button"
-          >
-            {/* eslint-disable-next-line react/self-closing-comp */}
-            <span className="hamburger-top"></span>
-            {/* eslint-disable-next-line react/self-closing-comp */}
-            <span className="hamburger-middle"></span>
-            {/* eslint-disable-next-line react/self-closing-comp */}
-            <span className="hamburger-bottom"></span>
-          </button>
-        </div>
-        {/* Mobile Menu */}
-        <div className="md:hidden">
-          <div
-            id="menu"
-            className="absolute left-6 right-6 mt-10 hidden flex-col items-center space-y-6 self-end bg-white py-8 font-bold drop-shadow-md sm:w-auto sm:self-center"
-          >
-            <a href="/pricing">Pricing</a>
-            <a href="/product">Product</a>
-            <a href="/about">About Us</a>
-            <a href="/careers">Careers</a>
-            <a href="/community">Community</a>
-          </div>
-        </div>
-      </nav>
       {/* Hero */}
       <section className="container mx-auto mt-10 flex flex-col-reverse items-center space-y-0 px-6 md:flex-row md:space-y-0">
         {/* Left Item */}
@@ -378,6 +347,6 @@ export default function Home() {
           </div>
         </div>
       </footer>
-    </div>
+    </>
   );
 }

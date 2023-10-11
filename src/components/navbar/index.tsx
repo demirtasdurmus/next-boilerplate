@@ -1,13 +1,14 @@
 'use client';
 
 import axios from 'axios';
-import clsx from 'clsx';
 import React, { useEffect, useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
-import Button from './button';
-import Menu from './menu';
-import Logo from './logo';
+import NavButton from './nav-button';
+import DesktopMenu from './desktop-menu';
+import CompanyLogo from './company-logo';
+import HamburgerButton from './hamburger-button';
+import MobileMenu from './mobile-menu';
 
 const menuItems = [
   {
@@ -36,6 +37,7 @@ export default function Navbar() {
   const router = useRouter();
   const pathname = usePathname();
   const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const handleLogout = () => {
     axios
@@ -67,22 +69,30 @@ export default function Navbar() {
       });
   };
 
+  const handleMobileMenuToggle = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
   useEffect(() => {
     getMe();
   }, [pathname]);
 
   return (
     /* Navbar */
-    <nav className={clsx('container', 'mx-auto', 'p-6')}>
+    <nav className="container relative mx-auto p-6">
       {/* Flex container */}
-      <div className={clsx('flex', 'justify-between')}>
+      <div className="flex items-center justify-between">
         {/* Logo */}
-        <Logo />
+        <CompanyLogo />
         {/* Menu */}
-        <Menu menuItems={menuItems} />
+        <DesktopMenu menuItems={menuItems} />
         {/* Button */}
-        <Button isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
+        <NavButton isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
+        {/* Hamburger Icon */}
+        <HamburgerButton handleMobileMenuToggle={handleMobileMenuToggle} />
       </div>
+      {/* Mobile Menu */}
+      {isMobileMenuOpen && <MobileMenu menuItems={menuItems} />}
     </nav>
   );
 }
