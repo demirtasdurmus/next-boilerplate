@@ -10,7 +10,7 @@ export default function Visual() {
         height={0}
         alt="Logo"
         sizes="100vw"
-        className="h-full w-10/12"
+        className="mx-auto h-full w-10/12 md:mx-0 md:w-full"
         priority
       />
     </div>
