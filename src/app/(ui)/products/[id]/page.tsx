@@ -1,4 +1,4 @@
-import Dialog from '@/components/Dialog';
+import Dialog from '@/components/shared/dialog';
 import Link from 'next/link';
 
 export default function Products() {

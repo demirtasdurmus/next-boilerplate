@@ -1,6 +1,6 @@
 import Footer from '@/components/footer';
+import Hero from '@/components/home/hero';
 import Navbar from '@/components/navbar';
-import clsx from 'clsx';
 import Image from 'next/image';
 
 export default function Home() {
@@ -9,40 +9,7 @@ export default function Home() {
       {/* Navbar */}
       <Navbar />
       {/* Hero */}
-      <section className="container mx-auto mt-10 flex flex-col-reverse items-center space-y-0 px-6 md:flex-row md:space-y-0">
-        {/* Left Item */}
-        <div className="mb-32 flex flex-col space-y-12 md:w-1/2">
-          <h1 className="text-center text-4xl font-bold md:text-left md:text-5xl">
-            Bring everyone together to build better products
-          </h1>
-          <p className="text-black-600 text-center md:text-left">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium
-            saepe praesentium sequi, corporis quod sed quo! Est mollitia
-            accusantium, eaque voluptatibus quia aspernatur reiciendis nemo,
-            porro necessitatibus quod doloribus a.
-          </p>
-          <div className="flex justify-center md:justify-start">
-            <a
-              href="/get-started"
-              className="baseline rounded-full bg-red-400 p-3 px-6 pt-2 text-white hover:bg-red-200"
-            >
-              Get Started
-            </a>
-          </div>
-        </div>
-        {/* Right Item - Image */}
-        <div className="md:w-1/2">
-          <Image
-            src="illustration-intro.svg"
-            width={0}
-            height={0}
-            alt="Logo"
-            sizes="100vw"
-            className={clsx('h-full', 'w-10/12')}
-            priority
-          />
-        </div>
-      </section>
+      <Hero />
       {/* Features */}
       <section id="features">
         {/* Flex container */}
