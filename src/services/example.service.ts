@@ -1,14 +1,22 @@
 import { TGetExamplesResponse } from '@/app/api/(modules)/examples/route';
 import { HttpClient } from '@/lib/http-client';
-import { useQuery } from '@tanstack/react-query';
 
-const httpClient = new HttpClient();
+const httpClient = new HttpClient({ modulePrefix: 'examples' });
 
-export const useGetExamples = () =>
-  useQuery({
-    queryKey: ['examples'],
-    queryFn: async () =>
-      httpClient
-        .get<TGetExamplesResponse>({ url: '/examples' })
-        .then((res) => res.data.data),
-  });
+export async function fetchExamples({
+  page,
+  limit,
+}: {
+  page: number;
+  limit: number;
+}) {
+  return httpClient
+    .get<TGetExamplesResponse>({
+      url: '/',
+      params: {
+        page,
+        limit,
+      },
+    })
+    .then((res) => res.data.data);
+}
