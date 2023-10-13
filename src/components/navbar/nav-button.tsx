@@ -1,14 +1,12 @@
+import { useAuthContext } from '@/context';
 import clsx from 'clsx';
 import Link from 'next/link';
 import React from 'react';
 import { BeatLoader } from 'react-spinners';
 
-type Props = {
-  isLoggedIn: boolean | null;
-  handleLogout: () => void;
-};
+export default function NavButton() {
+  const { loading, session, logout } = useAuthContext();
 
-export default function NavButton({ isLoggedIn, handleLogout }: Props) {
   const buttonClassName = clsx(
     'hidden',
     'md:block',
@@ -21,25 +19,25 @@ export default function NavButton({ isLoggedIn, handleLogout }: Props) {
     'font-bold',
   );
 
-  if (isLoggedIn === true) {
+  if (loading) {
     return (
-      <button className={buttonClassName} type="submit" onClick={handleLogout}>
+      <div className={buttonClassName}>
+        <BeatLoader color="#f2f2f2" className="" size={10} />
+      </div>
+    );
+  }
+
+  if (session) {
+    return (
+      <button className={buttonClassName} type="submit" onClick={logout}>
         Logout
       </button>
     );
   }
 
-  if (isLoggedIn === false) {
-    return (
-      <Link href="/login" className={buttonClassName}>
-        Login
-      </Link>
-    );
-  }
-
   return (
-    <div className={buttonClassName}>
-      <BeatLoader color="#f2f2f2" className="" size={10} />
-    </div>
+    <Link href="/login" className={buttonClassName}>
+      Login
+    </Link>
   );
 }
