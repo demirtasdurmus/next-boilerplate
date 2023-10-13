@@ -48,7 +48,7 @@ body {
   height: 3px;
   background: #000;
   transform: rotate(0);
-  transition: all 0.5s;
+  transition: all 0.2s;
 }
 
 /* The below class names are for toggling between hamburger and cross */

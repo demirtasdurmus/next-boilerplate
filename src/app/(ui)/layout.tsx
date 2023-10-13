@@ -4,6 +4,7 @@ import { Nunito } from 'next/font/google';
 import { ReactNode } from 'react';
 import Toast from '@/components/toast';
 import './globals.css';
+import Context from '@/context';
 
 type Props = {
   children: ReactNode;
@@ -23,7 +24,7 @@ export default function RootLayout({ children }: Props) {
   return (
     <html lang="en" className={clsx(fontNunito.variable, 'font-sans')}>
       <body>
-        {children}
+        <Context>{children}</Context>
         <Toast />
       </body>
     </html>
