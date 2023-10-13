@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const createExampleSchema = z.object(
+export const createExampleDto = z.object(
   {
     title: z.string({
       required_error: 'Title is required',
@@ -13,4 +13,4 @@ export const createExampleSchema = z.object(
   },
 );
 
-export type TCreateExample = z.infer<typeof createExampleSchema>;
+export type TCreateExampleDto = z.infer<typeof createExampleDto>;

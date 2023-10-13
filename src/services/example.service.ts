@@ -1,3 +1,4 @@
+import { TGetExamplesDto } from '@/app/api/(modules)/examples/_schemas/get-examples.dto';
 import { TGetExamplesResponse } from '@/app/api/(modules)/examples/route';
 import { HttpClient } from '@/lib/http-client';
 
@@ -16,7 +17,7 @@ export async function fetchExamples({
       params: {
         page,
         limit,
-      },
+      } satisfies TGetExamplesDto,
     })
     .then((res) => res.data.data);
 }

@@ -5,14 +5,11 @@ import {
 } from '../../_routers/public.router';
 import { parseRequestBodyMiddleware } from '../../_middlewares/parse-request-body.middleware';
 import {
-  TCreateExample,
-  createExampleSchema,
-} from './_schemas/create-example.schema';
+  TCreateExampleDto,
+  createExampleDto,
+} from './_schemas/create-example.dto';
 import { parseRequestQueryParamsMiddleware } from '../../_middlewares/parse-request-query-params.middleware';
-import {
-  TGetAllExamples,
-  getAllExamplesSchema,
-} from './_schemas/get-all-examples.schema';
+import { TGetExamplesDto, getExamplesDto } from './_schemas/get-examples.dto';
 import {
   TSuccessResponse,
   buildCreatedResponse,
@@ -44,7 +41,7 @@ export type TGetExamplesResponse = TSuccessResponse<
 
 async function createExampleHandler(
   _req: NextRequest,
-  ctx: IPublicRequestContext<TCreateExample>,
+  ctx: IPublicRequestContext<TCreateExampleDto>,
 ): Promise<NextResponse<TCreateExampleResponse>> {
   const data = await db.insert(examples).values(ctx.payload).returning();
 
@@ -53,9 +50,9 @@ async function createExampleHandler(
   });
 }
 
-async function getAllExamplesHandler(
+async function getExamplesHandler(
   _req: NextRequest,
-  ctx: IPublicRequestContext<unknown, unknown, TGetAllExamples>,
+  ctx: IPublicRequestContext<unknown, unknown, TGetExamplesDto>,
 ): Promise<NextResponse<TGetExamplesResponse>> {
   const offset = (ctx.queryParams.page - 1) * ctx.queryParams.limit;
 
@@ -70,24 +67,24 @@ async function getAllExamplesHandler(
   });
 }
 
-const createRouter = publicRouter<TCreateExample>()
-  .use(parseRequestBodyMiddleware(createExampleSchema))
+const createRouter = publicRouter<TCreateExampleDto>()
+  .use(parseRequestBodyMiddleware(createExampleDto))
   .post(createExampleHandler);
 
-const getAllRouter = publicRouter<unknown, unknown, TGetAllExamples>()
-  .use(parseRequestQueryParamsMiddleware(getAllExamplesSchema))
-  .get(getAllExamplesHandler);
+const getAllRouter = publicRouter<unknown, unknown, TGetExamplesDto>()
+  .use(parseRequestQueryParamsMiddleware(getExamplesDto))
+  .get(getExamplesHandler);
 
 export function POST(
   req: NextRequest,
-  ctx: IPublicRequestContext<TCreateExample>,
+  ctx: IPublicRequestContext<TCreateExampleDto>,
 ) {
   return createRouter.run(req, ctx);
 }
 
 export function GET(
   req: NextRequest,
-  ctx: IPublicRequestContext<unknown, unknown, TGetAllExamples>,
+  ctx: IPublicRequestContext<unknown, unknown, TGetExamplesDto>,
 ) {
   return getAllRouter.run(req, ctx);
 }

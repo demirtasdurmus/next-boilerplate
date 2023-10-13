@@ -1,8 +1,8 @@
 'use client';
 
 import { TLoginResponse } from '@/app/api/(modules)/auth/login/route';
+import { mutateLogin } from '@/services/auth.service';
 import { useMutation } from '@tanstack/react-query';
-import axios from 'axios';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
@@ -18,15 +18,7 @@ export default function Login() {
   });
 
   const loginMutation = useMutation({
-    mutationFn: () =>
-      axios
-        .post<TLoginResponse>('/api/auth/login', user)
-        .then((res) => res.data.metadata)
-        .catch((err) => {
-          throw new Error(
-            err.response ? err.response.data.errorMessage : err.message,
-          );
-        }),
+    mutationFn: () => mutateLogin(user),
     onSuccess: (metadata: TLoginResponse['metadata']) => {
       router.push('/');
       toast.success(metadata.message);

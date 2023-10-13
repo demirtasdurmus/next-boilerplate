@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const getAllExamplesSchema = z.object({
+export const getExamplesDto = z.object({
   page: z.preprocess(
     (a) => parseInt(z.string().default('1').parse(a), 10),
     z
@@ -17,4 +17,4 @@ export const getAllExamplesSchema = z.object({
   ),
 });
 
-export type TGetAllExamples = z.infer<typeof getAllExamplesSchema>;
+export type TGetExamplesDto = z.infer<typeof getExamplesDto>;
