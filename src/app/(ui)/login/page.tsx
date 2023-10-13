@@ -1,5 +1,7 @@
 'use client';
 
+import { TLoginResponse } from '@/app/api/(modules)/auth/login/route';
+import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -9,11 +11,26 @@ import { toast } from 'react-toastify';
 
 export default function Login() {
   const router = useRouter();
-  const [loading, setLoading] = useState<boolean>(false);
   const [buttonDisabled, setButtonDisabled] = useState<boolean>(false);
   const [user, setUser] = useState({
     email: '',
     password: '',
+  });
+
+  const loginMutation = useMutation({
+    mutationFn: () =>
+      axios
+        .post<TLoginResponse>('/api/auth/login', user)
+        .then((res) => res.data.metadata)
+        .catch((err) => {
+          throw new Error(
+            err.response ? err.response.data.errorMessage : err.message,
+          );
+        }),
+    onSuccess: (metadata: TLoginResponse['metadata']) => {
+      router.push('/');
+      toast.success(metadata.message);
+    },
   });
 
   const validateInputs = () => {
@@ -22,25 +39,6 @@ export default function Login() {
     } else {
       setButtonDisabled(false);
     }
-  };
-
-  const handleSubmit = () => {
-    setLoading(true);
-
-    axios
-      .post('/api/auth/login', user)
-      .then((res) => {
-        if (res.status === 200) {
-          router.push('/');
-          toast.success(res.data.metadata.message);
-        }
-      })
-      .catch((err) => {
-        toast.error(err.response.data.errorMessage);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
   };
 
   useEffect(() => {
@@ -76,10 +74,10 @@ export default function Login() {
       <button
         type="submit"
         className="mt-4 flex w-64 cursor-pointer items-center justify-center rounded-full border-2 border-white bg-red-400 p-2 py-2 hover:bg-red-300"
-        onClick={handleSubmit}
+        onClick={() => loginMutation.mutate()}
         disabled={buttonDisabled}
       >
-        {loading ? (
+        {loginMutation.isLoading ? (
           <BounceLoader color="#f2f2f2" className="" size={20} />
         ) : (
           'Login'
