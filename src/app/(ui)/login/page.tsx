@@ -69,7 +69,7 @@ export default function Login() {
         onClick={() => loginMutation.mutate()}
         disabled={buttonDisabled}
       >
-        {loginMutation.isLoading ? (
+        {loginMutation.status === 'loading' ? (
           <BounceLoader color="#f2f2f2" className="" size={20} />
         ) : (
           'Login'

@@ -1,6 +1,8 @@
 'use client';
 
-import axios from 'axios';
+import { TRegisterResponse } from '@/app/api/(modules)/auth/register/route';
+import { mutateRegister } from '@/services/auth.service';
+import { useMutation } from '@tanstack/react-query';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
@@ -9,12 +11,19 @@ import { toast } from 'react-toastify';
 
 export default function Register() {
   const router = useRouter();
-  const [loading, setLoading] = useState<boolean>(false);
   const [buttonDisabled, setButtonDisabled] = useState<boolean>(false);
   const [user, setUser] = useState({
     email: '',
     password: '',
     confirmPassword: '',
+  });
+
+  const registerMutation = useMutation({
+    mutationFn: () => mutateRegister(user),
+    onSuccess: (metadata: TRegisterResponse['metadata']) => {
+      router.push('/login');
+      toast.success(metadata.message);
+    },
   });
 
   const validateInputs = () => {
@@ -29,25 +38,6 @@ export default function Register() {
     } else {
       setButtonDisabled(false);
     }
-  };
-
-  const handleSubmit = () => {
-    setLoading(true);
-
-    axios
-      .post('/api/auth/register', user)
-      .then((res) => {
-        if (res.status === 201) {
-          router.push('/login');
-        }
-        toast.success(res.data.metadata.message);
-      })
-      .catch((err) => {
-        toast.error(err.response.data.errorMessage);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
   };
 
   useEffect(() => {
@@ -96,10 +86,10 @@ export default function Register() {
       <button
         type="submit"
         className="mt-4 flex w-64 cursor-pointer items-center justify-center rounded-full border-2 border-white bg-red-400 p-2 py-2 hover:bg-red-300"
-        onClick={handleSubmit}
+        onClick={() => registerMutation.mutate()}
         disabled={buttonDisabled}
       >
-        {loading ? (
+        {registerMutation.status === 'loading' ? (
           <BounceLoader color="#f2f2f2" className="" size={20} />
         ) : (
           'Register'
