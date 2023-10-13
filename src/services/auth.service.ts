@@ -1,6 +1,7 @@
 import { TLoginDto } from '@/app/api/(modules)/auth/_dto/login.dto';
 import { TRegisterDto } from '@/app/api/(modules)/auth/_dto/register.dto';
 import { TLoginResponse } from '@/app/api/(modules)/auth/login/route';
+import { TLogoutResponse } from '@/app/api/(modules)/auth/logout/route';
 import { HttpClient } from '@/lib/http-client';
 
 const httpClient = new HttpClient({ modulePrefix: 'auth' });
@@ -40,6 +41,14 @@ export async function mutateLogin({
         email,
         password,
       } satisfies TLoginDto,
+    })
+    .then((res) => res.data.metadata);
+}
+
+export async function mutateLogout() {
+  return httpClient
+    .get<TLogoutResponse>({
+      url: '/logout',
     })
     .then((res) => res.data.metadata);
 }
