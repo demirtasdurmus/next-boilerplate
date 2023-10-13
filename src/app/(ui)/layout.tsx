@@ -2,9 +2,8 @@ import clsx from 'clsx';
 import type { Metadata } from 'next';
 import { Nunito } from 'next/font/google';
 import { ReactNode } from 'react';
-import { ToastContainer } from 'react-toastify';
+import Toast from '@/components/toast';
 import './globals.css';
-import 'react-toastify/dist/ReactToastify.css';
 
 type Props = {
   children: ReactNode;
@@ -25,7 +24,7 @@ export default function RootLayout({ children }: Props) {
     <html lang="en" className={clsx(fontNunito.variable, 'font-sans')}>
       <body>
         {children}
-        <ToastContainer />
+        <Toast />
       </body>
     </html>
   );

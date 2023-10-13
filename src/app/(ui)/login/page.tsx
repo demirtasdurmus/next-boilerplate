@@ -57,7 +57,7 @@ export default function Login() {
           id="email"
           type="text"
           placeholder="Email"
-          className="border-grey-300 my-4 w-64 rounded border p-2 text-black focus:outline-none focus:ring-2 focus:ring-white"
+          className="border-grey-300 my-4 w-64 rounded-full border p-2 text-black focus:outline-none focus:ring-2 focus:ring-white"
           value={user.email}
           onChange={(e) => setUser({ ...user, email: e.target.value })}
         />
@@ -68,14 +68,14 @@ export default function Login() {
           id="password"
           type="password"
           placeholder="Password"
-          className="border-grey-300 my-4 w-64 rounded border p-2 text-black focus:outline-none focus:ring-2 focus:ring-white"
+          className="border-grey-300 my-4 w-64 rounded-full border p-2 text-black focus:outline-none focus:ring-2 focus:ring-white"
           value={user.password}
           onChange={(e) => setUser({ ...user, password: e.target.value })}
         />
       </label>
       <button
         type="submit"
-        className="mt-4 flex w-64 cursor-pointer items-center justify-center rounded border-2 border-white p-2 py-2 hover:text-blue-400"
+        className="mt-4 flex w-64 cursor-pointer items-center justify-center rounded-full border-2 border-white bg-red-400 p-2 py-2 hover:bg-red-300"
         onClick={handleSubmit}
         disabled={buttonDisabled}
       >
