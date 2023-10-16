@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const exampleIdSchema = z.object({
+export const exampleIdDto = z.object({
   id: z
     .string({
       required_error: 'Id is required',
@@ -10,4 +10,4 @@ export const exampleIdSchema = z.object({
     }),
 });
 
-export type TExampleId = z.infer<typeof exampleIdSchema>;
+export type TExampleIdDto = z.infer<typeof exampleIdDto>;

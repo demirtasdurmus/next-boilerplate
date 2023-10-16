@@ -6,6 +6,7 @@
     "Pinterest",
     "Rollbar",
     "tailwindcss",
+    "tanstack",
     "toastify"
   ],
   "tailwindCSS.experimental.classRegex": [
