@@ -20,13 +20,13 @@ const menuItems = [
   },
   {
     id: '3',
-    name: 'Contact',
-    href: '/contact',
+    name: 'Client Page',
+    href: '/client-page',
   },
   {
     id: '4',
-    name: 'Products',
-    href: '/products',
+    name: 'Server Page',
+    href: '/server-page',
   },
 ];
 

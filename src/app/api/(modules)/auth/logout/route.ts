@@ -35,8 +35,8 @@ async function logoutHandler(
   return res;
 }
 
-const logoutRouter = publicRouter().get(logoutHandler);
+const logoutRouter = publicRouter().post(logoutHandler);
 
-export function GET(req: NextRequest, ctx: IPublicRequestContext) {
+export function POST(req: NextRequest, ctx: IPublicRequestContext) {
   return logoutRouter.run(req, ctx);
 }

@@ -2,9 +2,8 @@
 
 import { TLogoutResponse } from '@/app/api/(modules)/auth/logout/route';
 import { TMeResponse } from '@/app/api/(modules)/auth/me/route';
-import { mutateLogout } from '@/services/auth.service';
+import { fetchMe, logout } from '@/services/auth.service';
 import { useMutation } from '@tanstack/react-query';
-import axios from 'axios';
 import { usePathname } from 'next/navigation';
 import {
   ReactNode,
@@ -37,14 +36,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const [loading, setLoading] = useState<boolean>(true);
   const [session, setSession] = useState<TMeResponse['data']>(null);
 
-  // used axios instead of mutateGetMe
-  // because mutateGetMe will cause one more rerender
-  // because of its status variety
+  // used api fn instead of useQuery
+  // because useQuery will cause more rerenders
   const getMe = () => {
-    axios
-      .get<TMeResponse>('/api/auth/me')
-      .then((res) => {
-        setSession(res.data.data);
+    fetchMe()
+      .then((data) => {
+        setSession(data);
       })
       .catch(() => {
         setSession(null);
@@ -55,7 +52,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   };
 
   const logoutMutation = useMutation({
-    mutationFn: () => mutateLogout(),
+    mutationFn: () => logout(),
     onSuccess: (metadata: TLogoutResponse['metadata']) => {
       setSession(null);
       toast.success(metadata.message);

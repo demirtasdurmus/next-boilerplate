@@ -2,11 +2,12 @@ import { TLoginDto } from '@/app/api/(modules)/auth/_dto/login.dto';
 import { TRegisterDto } from '@/app/api/(modules)/auth/_dto/register.dto';
 import { TLoginResponse } from '@/app/api/(modules)/auth/login/route';
 import { TLogoutResponse } from '@/app/api/(modules)/auth/logout/route';
+import { TMeResponse } from '@/app/api/(modules)/auth/me/route';
 import { HttpClient } from '@/lib/http-client';
 
 const httpClient = new HttpClient({ modulePrefix: 'auth' });
 
-export async function mutateRegister({
+export async function register({
   email,
   password,
   confirmPassword,
@@ -27,7 +28,7 @@ export async function mutateRegister({
     .then((res) => res.data.metadata);
 }
 
-export async function mutateLogin({
+export async function login({
   email,
   password,
 }: {
@@ -45,10 +46,18 @@ export async function mutateLogin({
     .then((res) => res.data.metadata);
 }
 
-export async function mutateLogout() {
+export async function logout() {
   return httpClient
-    .get<TLogoutResponse>({
+    .post<TLogoutResponse>({
       url: '/logout',
     })
     .then((res) => res.data.metadata);
+}
+
+export async function fetchMe() {
+  return httpClient
+    .get<TMeResponse>({
+      url: '/me',
+    })
+    .then((res) => res.data.data);
 }

@@ -1,7 +1,7 @@
 'use client';
 
 import { TRegisterResponse } from '@/app/api/(modules)/auth/register/route';
-import { mutateRegister } from '@/services/auth.service';
+import { register } from '@/services/auth.service';
 import { useMutation } from '@tanstack/react-query';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -19,7 +19,7 @@ export default function Register() {
   });
 
   const registerMutation = useMutation({
-    mutationFn: () => mutateRegister(user),
+    mutationFn: () => register(user),
     onSuccess: (metadata: TRegisterResponse['metadata']) => {
       router.push('/login');
       toast.success(metadata.message);

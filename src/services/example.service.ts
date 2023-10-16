@@ -7,9 +7,11 @@ const httpClient = new HttpClient({ modulePrefix: 'examples' });
 export async function fetchExamples({
   page,
   limit,
+  q,
 }: {
   page: number;
   limit: number;
+  q?: string;
 }) {
   return httpClient
     .get<TGetExamplesResponse>({
@@ -17,6 +19,7 @@ export async function fetchExamples({
       params: {
         page,
         limit,
+        q,
       } satisfies TGetExamplesDto,
     })
     .then((res) => res.data.data);

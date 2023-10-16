@@ -15,6 +15,7 @@ export const getExamplesDto = z.object({
       .positive()
       .max(100),
   ),
+  q: z.string().optional(),
 });
 
 export type TGetExamplesDto = z.infer<typeof getExamplesDto>;
