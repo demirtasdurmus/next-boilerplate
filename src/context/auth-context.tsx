@@ -4,7 +4,6 @@ import { TLogoutResponse } from '@/app/api/(modules)/auth/logout/route';
 import { TMeResponse } from '@/app/api/(modules)/auth/me/route';
 import { fetchMe, logout } from '@/services/auth.service';
 import { useMutation } from '@tanstack/react-query';
-import { usePathname } from 'next/navigation';
 import {
   ReactNode,
   createContext,
@@ -32,7 +31,6 @@ const AuthContext = createContext<AuthContextProps>({
 });
 
 export function AuthProvider({ children }: AuthProviderProps) {
-  const pathname = usePathname();
   const [loading, setLoading] = useState<boolean>(true);
   const [session, setSession] = useState<TMeResponse['data']>(null);
 
@@ -61,7 +59,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   useEffect(() => {
     getMe();
-  }, [pathname]);
+  }, []);
 
   const props: AuthContextProps = useMemo(
     () => ({
