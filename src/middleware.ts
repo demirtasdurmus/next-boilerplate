@@ -1,5 +1,5 @@
-import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
+import { NextRequest, NextResponse } from 'next/server';
 import { AUTH_COOKIE } from './app/api/(modules)/auth/_constants/auth-cookie-name.constant';
 import { verifyJWT } from './app/api/(modules)/auth/_utils/verify-jwt.util';
 

@@ -2,6 +2,7 @@
   "cSpell.words": [
     "clsx",
     "commitlint",
+    "hookform",
     "nunito",
     "Pinterest",
     "Rollbar",
@@ -14,5 +15,8 @@
   ],
   "files.associations": {
     "*.css": "tailwindcss"
+  },
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true
   }
 }

@@ -1,82 +1,110 @@
+/* eslint-disable react/jsx-props-no-spreading */
+
 'use client';
 
+import { TLoginDto, loginDto } from '@/app/api/(modules)/auth/_dto/login.dto';
 import { TLoginResponse } from '@/app/api/(modules)/auth/login/route';
 import { login } from '@/services/auth.service';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
+import clsx from 'clsx';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
-import { BounceLoader } from 'react-spinners';
+import { useForm } from 'react-hook-form';
+import { BeatLoader } from 'react-spinners';
 import { toast } from 'react-toastify';
 
 export default function Login() {
-  const router = useRouter();
-  const [buttonDisabled, setButtonDisabled] = useState<boolean>(false);
-  const [user, setUser] = useState({
-    email: '',
-    password: '',
+  const form = useForm<TLoginDto>({
+    resolver: zodResolver(loginDto),
+    defaultValues: {
+      email: '',
+      password: '',
+    },
   });
 
-  const loginMutation = useMutation({
-    mutationFn: () => login(user),
+  const { mutateAsync: mutateLogin, status } = useMutation({
+    mutationFn: (data: TLoginDto) => login(data),
     onSuccess: (metadata: TLoginResponse['metadata']) => {
-      router.push('/');
+      // used this one over next router to hard refresh
+      window.location.href = '/';
       toast.success(metadata.message);
     },
   });
 
-  const validateInputs = () => {
-    if (user.email === '' || user.password === '') {
-      setButtonDisabled(true);
-    } else {
-      setButtonDisabled(false);
-    }
-  };
-
-  useEffect(() => {
-    validateInputs();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user]);
-
   return (
-    <div className="flex h-screen w-full flex-col items-center justify-center p-5">
-      <h1 className="my-8 text-2xl">Login</h1>
-      <label htmlFor="email" className="flex flex-col items-center">
-        Email
-        <input
-          id="email"
-          type="text"
-          placeholder="Email"
-          className="border-grey-300 my-4 w-64 rounded-full border p-2 text-black focus:outline-none focus:ring-2 focus:ring-white"
-          value={user.email}
-          onChange={(e) => setUser({ ...user, email: e.target.value })}
-        />
-      </label>
-      <label htmlFor="password" className="flex flex-col items-center">
-        Password
-        <input
-          id="password"
-          type="password"
-          placeholder="Password"
-          className="border-grey-300 my-4 w-64 rounded-full border p-2 text-black focus:outline-none focus:ring-2 focus:ring-white"
-          value={user.password}
-          onChange={(e) => setUser({ ...user, password: e.target.value })}
-        />
-      </label>
-      <button
-        type="submit"
-        className="mt-4 flex w-64 cursor-pointer items-center justify-center rounded-full border-2 border-white bg-red-400 p-2 py-2 hover:bg-red-300"
-        onClick={() => loginMutation.mutate()}
-        disabled={buttonDisabled}
+    <div className="flex h-screen w-full flex-col items-center justify-center p-16">
+      {/* Heading */}
+      <h1 className="my-8 text-2xl font-bold">Login</h1>
+      {/* Form */}
+      <form
+        onSubmit={form.handleSubmit((data) => mutateLogin(data))}
+        className="w-full space-y-6 md:w-1/3"
       >
-        {loginMutation.status === 'loading' ? (
-          <BounceLoader color="#f2f2f2" className="" size={20} />
-        ) : (
-          'Login'
-        )}
-      </button>
-      <Link className="my-2 text-sm hover:text-blue-400" href="/register">
-        {`Don't`} have an account? Register
+        {/* Input Element Email */}
+        <div className="">
+          <label htmlFor="email" className="flex flex-col items-center">
+            Email
+            <input
+              id="email"
+              type="text"
+              placeholder="Email"
+              className={clsx(
+                'w-full rounded-xl border-2 p-2 px-4 text-black focus:outline-none',
+                form.formState.errors.email
+                  ? 'border-red-500'
+                  : 'border-grey-300 hover:border-gray-400 focus:border-gray-600',
+              )}
+              {...form.register('email')}
+            />
+          </label>
+          <p className="ml-1 text-xs text-red-500">
+            {form.formState.errors.email?.message}
+          </p>
+        </div>
+        {/* Input Element Password */}
+        <div className="">
+          <label htmlFor="password" className="flex flex-col items-center">
+            Password
+            <input
+              id="password"
+              type="password"
+              placeholder="Password"
+              className={clsx(
+                'w-full rounded-xl border-2 p-2 px-4 text-black focus:outline-none',
+                form.formState.errors.password
+                  ? 'border-red-500'
+                  : 'border-grey-300 hover:border-gray-400 focus:border-gray-600',
+              )}
+              {...form.register('password')}
+            />
+          </label>
+          <p className="ml-1 text-xs text-red-500">
+            {form.formState.errors.password?.message}
+          </p>
+        </div>
+        {/* Button */}
+        <button
+          type="submit"
+          className={clsx(
+            'flex h-12 w-full cursor-pointer items-center justify-center rounded-full border-2 border-white  p-2 text-white hover:bg-red-500',
+            status === 'loading' ? 'bg-red-300' : 'bg-red-400',
+          )}
+          onClick={form.handleSubmit((data) => mutateLogin(data))}
+          disabled={status === 'loading'}
+        >
+          {status === 'loading' ? (
+            <BeatLoader color="#f2f2f2" className="" size={12} />
+          ) : (
+            'Login'
+          )}
+        </button>
+      </form>
+      {/* Register Link */}
+      <Link
+        className="my-2 text-sm font-bold text-blue-500 hover:text-blue-600"
+        href="/register"
+      >
+        Don&apos;t have an account? Register
       </Link>
     </div>
   );
