@@ -1,101 +1,81 @@
 'use client';
 
+import {
+  TRegisterDto,
+  registerDto,
+} from '@/app/api/(modules)/auth/_dto/register.dto';
 import { TRegisterResponse } from '@/app/api/(modules)/auth/register/route';
+import { Button, Input } from '@/components/shared';
 import { register } from '@/services/auth.service';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
-import { BounceLoader } from 'react-spinners';
+import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
 export default function Register() {
   const router = useRouter();
-  const [buttonDisabled, setButtonDisabled] = useState<boolean>(false);
-  const [user, setUser] = useState({
-    email: '',
-    password: '',
-    confirmPassword: '',
+  const form = useForm<TRegisterDto>({
+    resolver: zodResolver(registerDto),
+    defaultValues: {
+      email: '',
+      password: '',
+      confirmPassword: '',
+    },
   });
 
-  const registerMutation = useMutation({
-    mutationFn: () => register(user),
+  const { mutateAsync: mutateRegister, status } = useMutation({
+    mutationFn: (data: TRegisterDto) => register(data),
     onSuccess: (metadata: TRegisterResponse['metadata']) => {
       router.push('/login');
       toast.success(metadata.message);
     },
   });
 
-  const validateInputs = () => {
-    if (
-      user.email === '' ||
-      user.password === '' ||
-      user.confirmPassword === ''
-    ) {
-      setButtonDisabled(true);
-    } else if (user.password !== user.confirmPassword) {
-      setButtonDisabled(true);
-    } else {
-      setButtonDisabled(false);
-    }
-  };
-
-  useEffect(() => {
-    validateInputs();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user]);
-
   return (
-    <div className="flex h-screen w-full flex-col items-center justify-center p-5">
-      <h1 className="my-8 text-2xl">Register</h1>
-      <label htmlFor="email" className="flex flex-col items-center">
-        Email
-        <input
-          id="email"
-          type="text"
-          placeholder="Email"
-          className="border-grey-300 my-4 w-64 rounded-full border p-2 text-black focus:outline-none focus:ring-2 focus:ring-white"
-          value={user.email}
-          onChange={(e) => setUser({ ...user, email: e.target.value })}
-        />
-      </label>
-      <label htmlFor="password" className="flex flex-col items-center">
-        Password
-        <input
-          id="password"
-          type="password"
-          placeholder="Password"
-          className="border-grey-300 my-4 w-64 rounded-full border p-2 text-black focus:outline-none focus:ring-2 focus:ring-white"
-          value={user.password}
-          onChange={(e) => setUser({ ...user, password: e.target.value })}
-        />
-      </label>
-      <label htmlFor="confirmPassword" className="flex flex-col items-center">
-        Confirm Password
-        <input
-          id="confirmPassword"
-          type="password"
-          placeholder="Confirm Password"
-          className="border-grey-300 my-4 w-64 rounded-full border p-2 text-black focus:outline-none focus:ring-2 focus:ring-white"
-          value={user.confirmPassword}
-          onChange={(e) =>
-            setUser({ ...user, confirmPassword: e.target.value })
-          }
-        />
-      </label>
-      <button
-        type="submit"
-        className="mt-4 flex w-64 cursor-pointer items-center justify-center rounded-full border-2 border-white bg-red-400 p-2 py-2 hover:bg-red-300"
-        onClick={() => registerMutation.mutate()}
-        disabled={buttonDisabled}
+    <div className="flex h-screen w-full flex-col items-center justify-center p-16">
+      {/* Heading */}
+      <h1 className="my-8 text-2xl font-bold">Register</h1>
+      {/* Form */}
+      <form
+        className="w-full space-y-6 md:w-1/3"
+        onSubmit={form.handleSubmit((data) => mutateRegister(data))}
       >
-        {registerMutation.status === 'loading' ? (
-          <BounceLoader color="#f2f2f2" className="" size={20} />
-        ) : (
-          'Register'
-        )}
-      </button>
-      <Link className="my-2 text-sm hover:text-blue-400" href="/login">
+        <Input
+          type="text"
+          inputName="Email"
+          placeholder="Email"
+          validationError={form.formState.errors.email?.message}
+          {...form.register('email')}
+        />
+        <Input
+          type="password"
+          inputName="Password"
+          placeholder="Password"
+          validationError={form.formState.errors.password?.message}
+          {...form.register('password')}
+        />
+        <Input
+          type="password"
+          inputName="Confirm Password"
+          placeholder="Confirm Password"
+          validationError={form.formState.errors.confirmPassword?.message}
+          {...form.register('confirmPassword')}
+        />
+        <Button
+          type="submit"
+          content={'Register'}
+          loading={status === 'loading'}
+          disabled={status === 'loading'}
+          onClick={form.handleSubmit((data) => mutateRegister(data))}
+        />
+      </form>
+      {/* Login Link */}
+      <Link
+        className="my-2 text-sm font-bold text-blue-500 hover:text-blue-600"
+        href="/login"
+      >
         Already have an account? Login
       </Link>
     </div>
