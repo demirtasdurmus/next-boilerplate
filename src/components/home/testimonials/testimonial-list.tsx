@@ -1,4 +1,3 @@
-import React from 'react';
 import TestimonialItem from './testimonial-item';
 
 type Props = {

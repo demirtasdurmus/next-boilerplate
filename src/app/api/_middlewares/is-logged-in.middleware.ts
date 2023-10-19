@@ -1,8 +1,8 @@
 /* eslint-disable import/no-cycle */
-import { NextRequest } from 'next/server';
 import { NextHandler } from 'next-connect';
-import { IProtectedRequestContext } from '../_routers/protected.router';
+import { NextRequest } from 'next/server';
 import { UnauthorizedError } from '../_errors/unauthorized.error';
+import { IProtectedRequestContext } from '../_routers/protected.router';
 
 export async function isLoggedInMiddleware(
   _req: NextRequest,

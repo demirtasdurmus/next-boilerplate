@@ -1,4 +1,3 @@
-import React from 'react';
 import Copyright from './copyright';
 
 export default function InputContainer() {

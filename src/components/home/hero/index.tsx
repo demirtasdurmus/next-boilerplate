@@ -1,4 +1,3 @@
-import React from 'react';
 import Subject from './subject';
 import Visual from './visual';
 

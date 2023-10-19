@@ -1,7 +1,6 @@
 import { useAuthContext } from '@/context';
 import clsx from 'clsx';
 import Link from 'next/link';
-import React from 'react';
 import { BeatLoader } from 'react-spinners';
 
 export default function NavButton() {

@@ -1,6 +1,5 @@
 import clsx from 'clsx';
 import Link from 'next/link';
-import React from 'react';
 
 type Props = {
   name: string;

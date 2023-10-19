@@ -1,6 +1,5 @@
-import React from 'react';
-import TestimonialList from './testimonial-list';
 import LinkButton from '../link-button';
+import TestimonialList from './testimonial-list';
 
 const testimonials = {
   title: 'What is Different About Us?',

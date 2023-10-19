@@ -2,7 +2,7 @@
 
 import { fetchExamples } from '@/services/example.service';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { PulseLoader } from 'react-spinners';
 
 const examplesQKey = 'examples';

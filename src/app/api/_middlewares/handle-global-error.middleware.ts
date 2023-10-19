@@ -1,8 +1,8 @@
-import { NextRequest } from 'next/server';
 import { NextHandler } from 'next-connect';
-import { IBaseRequestContext } from '../_routers/base-request-context.interface';
+import { NextRequest } from 'next/server';
 import { BaseError } from '../_errors/base.error';
 import { serializeError } from '../_errors/serialize-error.util';
+import { IBaseRequestContext } from '../_routers/base-request-context.interface';
 import { buildErrorResponse } from '../_utils/build-error-response.util';
 
 /**

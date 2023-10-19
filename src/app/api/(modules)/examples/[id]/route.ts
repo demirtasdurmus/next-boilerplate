@@ -1,19 +1,19 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { parseRequestBodyMiddleware } from '../../../_middlewares/parse-request-body.middleware';
+import { parseRequestParamsMiddleware } from '../../../_middlewares/parse-request-params.middleware';
 import {
   IPublicRequestContext,
   publicRouter,
 } from '../../../_routers/public.router';
-import { parseRequestParamsMiddleware } from '../../../_middlewares/parse-request-params.middleware';
+import {
+  TSuccessResponse,
+  buildOkResponseWithMessage,
+} from '../../../_utils/build-success-response.util';
 import { TExampleIdDto, exampleIdDto } from '../_schemas/example-id.dto';
 import {
   TUpdateExampleDto,
   updateExampleDto,
 } from '../_schemas/update-example.dto';
-import { parseRequestBodyMiddleware } from '../../../_middlewares/parse-request-body.middleware';
-import {
-  TSuccessResponse,
-  buildOkResponseWithMessage,
-} from '../../../_utils/build-success-response.util';
 
 export type TGenericResponse = TSuccessResponse<unknown, { message: string }>;
 

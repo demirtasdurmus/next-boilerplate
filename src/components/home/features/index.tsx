@@ -1,6 +1,5 @@
-import React from 'react';
-import Intro from './intro';
 import FeatureList from './feature-list';
+import Intro from './intro';
 
 const introContent = {
   title: 'What is different about us?',

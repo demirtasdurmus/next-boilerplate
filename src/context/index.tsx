@@ -1,9 +1,9 @@
 'use client';
 
-import { ReactNode } from 'react';
+import { queryClient } from '@/lib/query-client';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { queryClient } from '@/lib/query-client';
+import { ReactNode } from 'react';
 import { AuthProvider } from './auth-context';
 
 type Props = {

@@ -1,8 +1,8 @@
 /* eslint-disable no-underscore-dangle */
-import postgres from 'postgres';
 import { PostgresJsDatabase, drizzle } from 'drizzle-orm/postgres-js';
-import * as schema from './schema';
+import postgres from 'postgres';
 import { InternalServerError } from '../_errors/internal-server.error';
+import * as schema from './schema';
 
 class DrizzleClient {
   private readonly _db: PostgresJsDatabase<typeof schema>;

@@ -1,4 +1,3 @@
-import { NextRequest, NextResponse } from 'next/server';
 import {
   IPublicRequestContext,
   publicRouter,
@@ -7,6 +6,7 @@ import {
   TSuccessResponse,
   buildOkResponse,
 } from '@/app/api/_utils/build-success-response.util';
+import { NextRequest, NextResponse } from 'next/server';
 import { AUTH_COOKIE } from '../_constants/auth-cookie-name.constant';
 
 export type TLogoutResponse = TSuccessResponse<

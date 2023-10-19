@@ -1,5 +1,3 @@
-import React from 'react';
-
 type Props = {
   order: string;
   title: string;

@@ -1,10 +1,10 @@
+import Toast from '@/components/toast';
+import Context from '@/context';
 import clsx from 'clsx';
 import type { Metadata } from 'next';
 import { Nunito } from 'next/font/google';
 import { ReactNode } from 'react';
-import Toast from '@/components/toast';
 import './globals.css';
-import Context from '@/context';
 
 type Props = {
   children: ReactNode;

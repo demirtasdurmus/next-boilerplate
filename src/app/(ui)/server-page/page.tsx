@@ -1,6 +1,6 @@
-import { notFound } from 'next/navigation';
 import { TGetExamplesResponse } from '@/app/api/(modules)/examples/route';
 import { fetchExamples } from '@/services/example.service';
+import { notFound } from 'next/navigation';
 import Pagination from './pagination';
 
 type Props = {

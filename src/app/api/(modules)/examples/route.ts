@@ -1,22 +1,22 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { db } from '../../_db';
+import { examples } from '../../_db/schema';
+import { parseRequestBodyMiddleware } from '../../_middlewares/parse-request-body.middleware';
+import { parseRequestQueryParamsMiddleware } from '../../_middlewares/parse-request-query-params.middleware';
 import {
   IPublicRequestContext,
   publicRouter,
 } from '../../_routers/public.router';
-import { parseRequestBodyMiddleware } from '../../_middlewares/parse-request-body.middleware';
-import {
-  TCreateExampleDto,
-  createExampleDto,
-} from './_schemas/create-example.dto';
-import { parseRequestQueryParamsMiddleware } from '../../_middlewares/parse-request-query-params.middleware';
-import { TGetExamplesDto, getExamplesDto } from './_schemas/get-examples.dto';
 import {
   TSuccessResponse,
   buildCreatedResponse,
   buildOkResponse,
 } from '../../_utils/build-success-response.util';
-import { examples } from '../../_db/schema';
-import { db } from '../../_db';
+import {
+  TCreateExampleDto,
+  createExampleDto,
+} from './_schemas/create-example.dto';
+import { TGetExamplesDto, getExamplesDto } from './_schemas/get-examples.dto';
 
 export type TCreateExampleResponse = TSuccessResponse<
   {

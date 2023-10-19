@@ -1,4 +1,3 @@
-import React from 'react';
 import LinkButton from '../link-button';
 
 type Props = {

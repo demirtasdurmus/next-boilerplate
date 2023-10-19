@@ -1,7 +1,6 @@
-import React from 'react';
-import LogoAndSocials from './logo-and-socials';
-import ListContainer from './list-container';
 import InputContainer from './input-container';
+import ListContainer from './list-container';
+import LogoAndSocials from './logo-and-socials';
 
 const socials = [
   {
@@ -79,11 +78,8 @@ export default function Footer() {
     <footer className="bg-darkBlue">
       {/* Flex Container */}
       <div className="container mx-auto flex flex-col-reverse justify-between space-y-8 px-6 py-10 md:flex-row md:space-y-0">
-        {/* Logo and Socials */}
         <LogoAndSocials socials={socials} />
-        {/* List Container */}
         <ListContainer footerList={footerList} />
-        {/* Input Container */}
         <InputContainer />
       </div>
     </footer>

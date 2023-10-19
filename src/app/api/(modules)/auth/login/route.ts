@@ -1,4 +1,6 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { db } from '@/app/api/_db';
+import { BadRequestError } from '@/app/api/_errors/bad-request.error';
+import { parseRequestBodyMiddleware } from '@/app/api/_middlewares/parse-request-body.middleware';
 import {
   IPublicRequestContext,
   publicRouter,
@@ -7,14 +9,12 @@ import {
   TSuccessResponse,
   buildOkResponse,
 } from '@/app/api/_utils/build-success-response.util';
-import { parseRequestBodyMiddleware } from '@/app/api/_middlewares/parse-request-body.middleware';
 import { eq } from 'drizzle-orm';
-import { db } from '@/app/api/_db';
-import { BadRequestError } from '@/app/api/_errors/bad-request.error';
+import { NextRequest, NextResponse } from 'next/server';
 import * as schemas from '../../../_db/schema';
+import { AUTH_COOKIE } from '../_constants/auth-cookie-name.constant';
 import { TLoginDto, loginDto } from '../_dto/login.dto';
 import { comparePassword } from '../_utils/compare-password.util';
-import { AUTH_COOKIE } from '../_constants/auth-cookie-name.constant';
 import { signJWT } from '../_utils/sign-jwt.util';
 
 export type TLoginResponse = TSuccessResponse<

@@ -1,19 +1,19 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { db } from '@/app/api/_db';
+import { Role } from '@/app/api/_db/schema';
 import {
   IPublicRequestContext,
   publicRouter,
 } from '@/app/api/_routers/public.router';
-import { cookies } from 'next/headers';
 import {
   TSuccessResponse,
   buildOkResponse,
 } from '@/app/api/_utils/build-success-response.util';
-import { Role } from '@/app/api/_db/schema';
-import { db } from '@/app/api/_db';
 import { eq } from 'drizzle-orm';
+import { cookies } from 'next/headers';
+import { NextRequest, NextResponse } from 'next/server';
+import * as schemas from '../../../_db/schema';
 import { AUTH_COOKIE } from '../_constants/auth-cookie-name.constant';
 import { verifyJWT } from '../_utils/verify-jwt.util';
-import * as schemas from '../../../_db/schema';
 
 export type TMeResponse = TSuccessResponse<{
   id: string;

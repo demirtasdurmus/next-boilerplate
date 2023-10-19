@@ -2,8 +2,8 @@
 import { createEdgeRouter } from 'next-connect';
 import { NextRequest } from 'next/server';
 import { handleGlobalErrorMiddleware } from '../_middlewares/handle-global-error.middleware';
-import { parseJsonMiddleware } from '../_middlewares/parse-json.middleware';
 import { isLoggedInMiddleware } from '../_middlewares/is-logged-in.middleware';
+import { parseJsonMiddleware } from '../_middlewares/parse-json.middleware';
 import { IBaseRequestContext } from './base-request-context.interface';
 
 export interface IProtectedRequestContext<
