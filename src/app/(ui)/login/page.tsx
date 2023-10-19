@@ -19,7 +19,7 @@ export default function Login() {
     },
   });
 
-  const { mutateAsync: mutateLogin, status } = useMutation({
+  const { mutate: mutateLogin, status } = useMutation({
     mutationFn: (data: TLoginDto) => login(data),
     onSuccess: (metadata: TLoginResponse['metadata']) => {
       // used this one over next router to hard refresh

@@ -49,7 +49,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       });
   };
 
-  const logoutMutation = useMutation({
+  const { mutate: mutateLogout } = useMutation({
     mutationFn: () => logout(),
     onSuccess: (metadata: TLogoutResponse['metadata']) => {
       setSession(null);
@@ -65,9 +65,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
     () => ({
       loading,
       session,
-      logout: () => logoutMutation.mutate(),
+      logout: () => mutateLogout(),
     }),
-    [loading, session, logoutMutation],
+    [loading, session, mutateLogout],
   );
 
   return <AuthContext.Provider value={props}>{children}</AuthContext.Provider>;

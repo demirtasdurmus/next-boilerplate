@@ -25,7 +25,7 @@ export default function Register() {
     },
   });
 
-  const { mutateAsync: mutateRegister, status } = useMutation({
+  const { mutate: mutateRegister, status } = useMutation({
     mutationFn: (data: TRegisterDto) => register(data),
     onSuccess: (metadata: TRegisterResponse['metadata']) => {
       router.push('/login');
