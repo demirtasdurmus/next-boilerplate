@@ -30,13 +30,16 @@ const testimonials = {
 
 export default function Testimonials() {
   return (
-    <div className="mx-auto mt-32 max-w-6xl px-5 text-center">
+    <section
+      className="mx-auto mt-32 max-w-6xl px-5 text-center"
+      id="testimonials"
+    >
       {/* Heading */}
       <h2 className="text-center text-4xl font-bold">{testimonials.title}</h2>
       {/* Testimonial List */}
       <TestimonialList testimonialList={testimonials.testimonialList} />
       {/* Button */}
       <LinkButton name="Get Started" href="/pricing" className="mt-16" />
-    </div>
+    </section>
   );
 }

@@ -15,16 +15,21 @@ const menuItems = [
   },
   {
     id: '2',
-    name: 'About',
-    href: '/about',
+    name: 'Features',
+    href: '#features',
   },
   {
     id: '3',
+    name: 'Testimonials',
+    href: '#testimonials',
+  },
+  {
+    id: '4',
     name: 'Client Page',
     href: '/client-page',
   },
   {
-    id: '4',
+    id: '5',
     name: 'Server Page',
     href: '/server-page',
   },

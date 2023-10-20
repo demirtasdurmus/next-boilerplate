@@ -14,7 +14,10 @@ const button = {
 
 export default function Hero() {
   return (
-    <section className="container mx-auto mt-10 flex flex-col-reverse items-center px-6 md:flex-row">
+    <section
+      className="container mx-auto mt-10 flex flex-col-reverse items-center px-6 md:flex-row"
+      id="hero"
+    >
       {/* Content Item */}
       <Subject content={content} button={button} />
       {/* Right Item - Image */}
