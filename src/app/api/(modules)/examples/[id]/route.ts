@@ -1,3 +1,7 @@
+import { db } from '@/app/api/_db';
+import { examples } from '@/app/api/_db/schema';
+import { NotFoundError } from '@/app/api/_errors/not-found.error';
+import { eq } from 'drizzle-orm';
 import { NextRequest, NextResponse } from 'next/server';
 import { parseRequestBodyMiddleware } from '../../../_middlewares/parse-request-body.middleware';
 import { parseRequestParamsMiddleware } from '../../../_middlewares/parse-request-params.middleware';
@@ -7,6 +11,7 @@ import {
 } from '../../../_routers/public.router';
 import {
   TSuccessResponse,
+  buildOkResponse,
   buildOkResponseWithMessage,
 } from '../../../_utils/build-success-response.util';
 import { TExampleIdDto, exampleIdDto } from '../_schemas/example-id.dto';
@@ -15,15 +20,27 @@ import {
   updateExampleDto,
 } from '../_schemas/update-example.dto';
 
+export type TGetExampleByIdResponse = TSuccessResponse<{
+  id: string;
+  title: string;
+  description: string | null;
+}>;
+
 export type TGenericResponse = TSuccessResponse<unknown, { message: string }>;
 
-async function getOneHandler(
+async function getOneById(
   req: NextRequest,
   ctx: IPublicRequestContext<unknown, TExampleIdDto>,
-): Promise<NextResponse<TGenericResponse>> {
-  return buildOkResponseWithMessage({
-    message: `Get one ${req.url}- ${JSON.stringify(ctx.params)}`,
+): Promise<NextResponse<TGetExampleByIdResponse>> {
+  const data = await db.query.examples.findFirst({
+    where: eq(examples.id, ctx.params.id),
   });
+
+  if (!data) {
+    throw new NotFoundError(`Example not found`);
+  }
+
+  return buildOkResponse({ data });
 }
 
 async function updateOneHandler(
@@ -48,7 +65,7 @@ async function deleteOneHandler(
 
 const getOneRouter = publicRouter<unknown, TExampleIdDto>()
   .use(parseRequestParamsMiddleware(exampleIdDto))
-  .get(getOneHandler);
+  .get(getOneById);
 
 const updateOneRouter = publicRouter<TUpdateExampleDto, TExampleIdDto>()
   .use(parseRequestParamsMiddleware(exampleIdDto))
