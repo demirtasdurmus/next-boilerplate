@@ -10,7 +10,7 @@ import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
-export default function Login() {
+export default function LoginForm() {
   const form = useForm<TLoginDto>({
     resolver: zodResolver(loginDto),
     defaultValues: {
