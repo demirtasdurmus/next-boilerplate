@@ -1,6 +1,10 @@
+'use client';
+
 import { useAuthContext } from '@/context';
+import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 type Props = {
   menuItems: {
@@ -11,6 +15,7 @@ type Props = {
 };
 
 export default function MobileMenu({ menuItems }: Props) {
+  const pathname = usePathname();
   const { loading, session, logout } = useAuthContext();
 
   return (
@@ -19,7 +24,11 @@ export default function MobileMenu({ menuItems }: Props) {
         <Link
           href={item.href}
           key={item.id}
-          className="hover:text-blue-400 hover:underline"
+          className={clsx(
+            pathname === item.href
+              ? 'cursor-default underline'
+              : 'hover:text-blue-400',
+          )}
         >
           {item.name}
         </Link>
