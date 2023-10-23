@@ -1,6 +1,5 @@
 import { TGetExamplesResponse } from '@/app/(server)/api/examples/route';
 import { fetchExamples } from '@/services/example.service';
-import { notFound } from 'next/navigation';
 import Pagination from './pagination';
 
 type Props = {
@@ -18,11 +17,7 @@ export default async function Products({ searchParams }: Props) {
   const q = searchParams.q || '';
 
   let products: TGetExamplesResponse['data'] = [];
-  try {
-    products = await fetchExamples({ page, limit, q });
-  } catch (error) {
-    return notFound();
-  }
+  products = await fetchExamples({ page, limit, q });
 
   return (
     <div className="mx-24 mt-12 flex flex-col gap-8">
