@@ -1,13 +1,13 @@
-import { db } from '@/app/api/_db';
-import { Role } from '@/app/api/_db/schema';
+import { db } from '@/app/(server)/_db';
+import { Role } from '@/app/(server)/_db/schema';
 import {
   IPublicRequestContext,
   publicRouter,
-} from '@/app/api/_routers/public.router';
+} from '@/app/(server)/_routers/public.router';
 import {
   TSuccessResponse,
   buildOkResponse,
-} from '@/app/api/_utils/build-success-response.util';
+} from '@/app/(server)/_utils/build-success-response.util';
 import { eq } from 'drizzle-orm';
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';

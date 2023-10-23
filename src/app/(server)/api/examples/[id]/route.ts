@@ -1,6 +1,6 @@
-import { db } from '@/app/api/_db';
-import { examples } from '@/app/api/_db/schema';
-import { NotFoundError } from '@/app/api/_errors/not-found.error';
+import { db } from '@/app/(server)/_db';
+import { examples } from '@/app/(server)/_db/schema';
+import { NotFoundError } from '@/app/(server)/_errors/not-found.error';
 import { eq } from 'drizzle-orm';
 import { NextRequest, NextResponse } from 'next/server';
 import { parseRequestBodyMiddleware } from '../../../_middlewares/parse-request-body.middleware';

@@ -2,8 +2,8 @@ import * as dotenv from 'dotenv';
 import { drizzle } from 'drizzle-orm/postgres-js';
 import { migrate } from 'drizzle-orm/postgres-js/migrator';
 import postgres from 'postgres';
-import { InternalServerError } from '../../_errors/internal-server.error';
-import { logger } from '../../_utils/logger.util';
+import { InternalServerError } from '../../api/_errors/internal-server.error';
+import { logger } from '../../api/_utils/logger.util';
 
 dotenv.config({ path: '.env.local' });
 

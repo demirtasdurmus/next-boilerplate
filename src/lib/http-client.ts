@@ -1,4 +1,4 @@
-import { TErrorResponse } from '@/app/api/_utils/build-error-response.util';
+import { TErrorResponse } from '@/app/(server)/_utils/build-error-response.util';
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 
 interface IHttpClientConfig {

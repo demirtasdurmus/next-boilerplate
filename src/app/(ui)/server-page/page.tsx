@@ -1,4 +1,4 @@
-import { TGetExamplesResponse } from '@/app/api/(modules)/examples/route';
+import { TGetExamplesResponse } from '@/app/(server)/api/examples/route';
 import { fetchExamples } from '@/services/example.service';
 import { notFound } from 'next/navigation';
 import Pagination from './pagination';

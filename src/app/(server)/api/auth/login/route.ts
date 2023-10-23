@@ -1,14 +1,14 @@
-import { db } from '@/app/api/_db';
-import { BadRequestError } from '@/app/api/_errors/bad-request.error';
-import { parseRequestBodyMiddleware } from '@/app/api/_middlewares/parse-request-body.middleware';
+import { db } from '@/app/(server)/_db';
+import { BadRequestError } from '@/app/(server)/_errors/bad-request.error';
+import { parseRequestBodyMiddleware } from '@/app/(server)/_middlewares/parse-request-body.middleware';
 import {
   IPublicRequestContext,
   publicRouter,
-} from '@/app/api/_routers/public.router';
+} from '@/app/(server)/_routers/public.router';
 import {
   TSuccessResponse,
   buildOkResponse,
-} from '@/app/api/_utils/build-success-response.util';
+} from '@/app/(server)/_utils/build-success-response.util';
 import { eq } from 'drizzle-orm';
 import { NextRequest, NextResponse } from 'next/server';
 import * as schemas from '../../../_db/schema';

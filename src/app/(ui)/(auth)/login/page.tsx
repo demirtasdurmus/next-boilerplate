@@ -1,7 +1,7 @@
 'use client';
 
-import { TLoginDto, loginDto } from '@/app/api/(modules)/auth/_dto/login.dto';
-import { TLoginResponse } from '@/app/api/(modules)/auth/login/route';
+import { TLoginDto, loginDto } from '@/app/(server)/api/auth/_dto/login.dto';
+import { TLoginResponse } from '@/app/(server)/api/auth/login/route';
 import { Button, Input } from '@/components/shared';
 import { login } from '@/services/auth.service';
 import { zodResolver } from '@hookform/resolvers/zod';

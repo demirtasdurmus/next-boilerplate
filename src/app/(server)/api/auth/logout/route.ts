@@ -1,11 +1,11 @@
 import {
   IPublicRequestContext,
   publicRouter,
-} from '@/app/api/_routers/public.router';
+} from '@/app/(server)/_routers/public.router';
 import {
   TSuccessResponse,
   buildOkResponse,
-} from '@/app/api/_utils/build-success-response.util';
+} from '@/app/(server)/_utils/build-success-response.util';
 import { NextRequest, NextResponse } from 'next/server';
 import { AUTH_COOKIE } from '../_constants/auth-cookie-name.constant';
 

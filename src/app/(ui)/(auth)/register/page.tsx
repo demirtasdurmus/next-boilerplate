@@ -3,8 +3,8 @@
 import {
   TRegisterDto,
   registerDto,
-} from '@/app/api/(modules)/auth/_dto/register.dto';
-import { TRegisterResponse } from '@/app/api/(modules)/auth/register/route';
+} from '@/app/(server)/api/auth/_dto/register.dto';
+import { TRegisterResponse } from '@/app/(server)/api/auth/register/route';
 import { Button, Input } from '@/components/shared';
 import { register } from '@/services/auth.service';
 import { zodResolver } from '@hookform/resolvers/zod';

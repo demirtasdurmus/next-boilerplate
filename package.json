@@ -13,7 +13,7 @@
     "type-check": "tsc -p tsconfig.json --noEmit",
     "drizzle:studio": "drizzle-kit studio",
     "drizzle:generate": "drizzle-kit generate:pg",
-    "drizzle:migrate": "ts-node --transpile-only ./src/app/api/_db/scripts/migrate.ts",
+    "drizzle:migrate": "ts-node --transpile-only ./src/app/(server)/_db/scripts/migrate.ts",
     "prepare": "husky install",
     "commit": "commit",
     "commitlint": "commitlint --edit"
