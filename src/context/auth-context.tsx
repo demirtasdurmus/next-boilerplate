@@ -1,7 +1,7 @@
 'use client';
 
-import { TLogoutResponse } from '@/app/api/(modules)/auth/logout/route';
-import { TMeResponse } from '@/app/api/(modules)/auth/me/route';
+import { TLogoutResponse } from '@/app/(server)/api/auth/logout/route';
+import { TMeResponse } from '@/app/(server)/api/auth/me/route';
 import { fetchMe, logout } from '@/services/auth.service';
 import { useMutation } from '@tanstack/react-query';
 import {

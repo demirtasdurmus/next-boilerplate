@@ -10,7 +10,7 @@ const ctaContent = {
 
 export default function Cta() {
   return (
-    <div className="bg-red-400">
+    <section className="bg-red-400" id="cta">
       <div className="container mx-auto mt-16 flex flex-col items-center justify-between gap-12 px-6 py-24 md:flex-row md:gap-0 md:py-12">
         <h2 className="text-center text-4xl font-bold text-white md:max-w-xl md:text-left md:text-5xl">
           {ctaContent.title}
@@ -22,6 +22,6 @@ export default function Cta() {
           {ctaContent.button.name}
         </Link>
       </div>
-    </div>
+    </section>
   );
 }

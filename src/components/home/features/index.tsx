@@ -30,7 +30,10 @@ const listContent = [
 
 export default function Features() {
   return (
-    <section className="container mx-auto mt-10 flex flex-col gap-12 px-4 md:flex-row md:space-y-0">
+    <section
+      className="container mx-auto mt-10 flex flex-col gap-12 px-4 md:flex-row md:space-y-0"
+      id="features"
+    >
       {/* Feature Intro */}
       <Intro
         title={introContent.title}

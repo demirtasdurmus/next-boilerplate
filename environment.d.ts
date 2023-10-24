@@ -5,6 +5,7 @@ declare global {
       DATABASE_URL: string;
       JWT_SECRET: string;
       JWT_EXPIRES_IN: number;
+      OPENAI_API_KEY: string;
     }
   }
 }

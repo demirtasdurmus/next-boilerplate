@@ -2,6 +2,7 @@
 
 import { fetchExamples } from '@/services/example.service';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { PulseLoader } from 'react-spinners';
 
@@ -34,7 +35,16 @@ export default function SearchPage() {
     <div>
       <div className="mb-8">Current Page: {page}</div>
       <div className="border border-gray-600 p-4">
-        {status === 'success' && JSON.stringify(data)}
+        {status === 'success' &&
+          data.map((item, idx) => (
+            <div key={item.id} className="flex gap-4">
+              <p>{idx + 1}.</p>
+              <Link href={`/client-page/${item.id}`} className="font-bold">
+                {item.title}
+              </Link>
+              <p>{item.description}</p>
+            </div>
+          ))}
       </div>
       <div className="my-16">
         <button
