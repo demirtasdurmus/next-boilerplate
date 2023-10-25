@@ -1,3 +1,21 @@
+import { createI18nMiddleware } from 'next-international/middleware';
+import { NextRequest } from 'next/server';
+
+const I18nMiddleware = createI18nMiddleware({
+  locales: ['en', 'tr'],
+  defaultLocale: 'en',
+  urlMappingStrategy: 'rewriteDefault',
+});
+
+export function middleware(request: NextRequest) {
+  return I18nMiddleware(request);
+}
+
+export const config = {
+  matcher: ['/((?!api|static|.*\\..*|_next|favicon.ico|robots.txt).*)'],
+};
+
+// TODO: Find a way to use this middleware along with the one above which is from next-international
 // import { cookies } from 'next/headers';
 // import { NextRequest, NextResponse } from 'next/server';
 // import { AUTH_COOKIE } from './app/(server)/api/auth/_constants/auth-cookie-name.constant';
@@ -60,19 +78,3 @@
 // export const config = {
 //   matcher: ['/profile', '/login', '/register'],
 // };
-
-import { createI18nMiddleware } from 'next-international/middleware';
-import { NextRequest } from 'next/server';
-
-const I18nMiddleware = createI18nMiddleware({
-  locales: ['en', 'tr'],
-  defaultLocale: 'en',
-});
-
-export function middleware(request: NextRequest) {
-  return I18nMiddleware(request);
-}
-
-export const config = {
-  matcher: ['/((?!api|static|.*\\..*|_next|favicon.ico|robots.txt).*)'],
-};
