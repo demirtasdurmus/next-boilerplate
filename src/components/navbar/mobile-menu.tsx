@@ -1,10 +1,11 @@
 'use client';
 
-import { useAuthContext } from '@/context';
+import { AuthContext } from '@/context/auth-context';
 import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useContext } from 'react';
 
 type Props = {
   menuItems: {
@@ -16,7 +17,7 @@ type Props = {
 
 export default function MobileMenu({ menuItems }: Props) {
   const pathname = usePathname();
-  const { loading, session, logout } = useAuthContext();
+  const { loading, session, logout } = useContext(AuthContext);
 
   return (
     <div className="absolute left-6 right-6 mt-10 flex flex-col items-center space-y-6 self-end bg-white py-8 font-bold drop-shadow-md sm:w-auto sm:self-center md:hidden">

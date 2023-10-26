@@ -4,14 +4,7 @@ import { TLogoutResponse } from '@/app/(server)/api/auth/logout/route';
 import { TMeResponse } from '@/app/(server)/api/auth/me/route';
 import { fetchMe, logout } from '@/services/auth.service';
 import { useMutation } from '@tanstack/react-query';
-import {
-  ReactNode,
-  createContext,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react';
+import { ReactNode, createContext, useEffect, useMemo, useState } from 'react';
 import { toast } from 'react-toastify';
 
 type AuthProviderProps = {
@@ -24,7 +17,7 @@ type AuthContextProps = {
   logout: () => void;
 };
 
-const AuthContext = createContext<AuthContextProps>({
+export const AuthContext = createContext<AuthContextProps>({
   loading: true,
   session: null,
   logout: () => {},
@@ -72,5 +65,3 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   return <AuthContext.Provider value={props}>{children}</AuthContext.Provider>;
 }
-
-export const useAuthContext = () => useContext(AuthContext);
