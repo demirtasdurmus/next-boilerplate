@@ -39,7 +39,7 @@ const examples = Array.from({ length: 20 }, (_, i) => ({
   imageUrl: `https://picsum.photos/300/200?random=${i + 1}`,
 }));
 
-async function seed() {
+(async function seed() {
   await db.delete(schemas.examples);
   await db.delete(schemas.users);
 
@@ -58,9 +58,7 @@ async function seed() {
       userId: user.id,
     })),
   );
-}
-
-seed()
+})()
   .then(() => {
     logger.info('Seed completed');
     process.exit(0);
