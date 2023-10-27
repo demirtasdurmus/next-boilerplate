@@ -40,7 +40,7 @@ async function getOneById(
     throw new NotFoundError(`Example not found`);
   }
 
-  return buildOkResponse({ data });
+  return buildOkResponse({ data, meta: undefined });
 }
 
 async function updateOneHandler(

@@ -29,7 +29,7 @@ export default function ClientPage() {
 
   const { status, data } = useQuery({
     queryKey: [examplesQKey, page, limit],
-    queryFn: () => fetchExamples({ page, limit }),
+    queryFn: () => fetchExamples({ page, limit, q: '' }),
     staleTime: 1000,
   });
 
@@ -37,7 +37,7 @@ export default function ClientPage() {
     const newPage = page + 1;
     queryClient.prefetchQuery({
       queryKey: [examplesQKey, newPage, limit],
-      queryFn: () => fetchExamples({ page: newPage, limit }),
+      queryFn: () => fetchExamples({ page: newPage, limit, q: '' }),
     });
   }, [data, page, queryClient]);
 
@@ -74,7 +74,7 @@ export default function ClientPage() {
       {/* Localization end */}
       <div className="border border-gray-600 p-4">
         {status === 'success' &&
-          data.map((item, idx) => (
+          data.data.map((item, idx) => (
             <div key={item.id} className="flex gap-4">
               <p>{idx + 1}.</p>
               <Link href={`/client-page/${item.id}`} className="font-bold">

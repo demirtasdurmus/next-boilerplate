@@ -14,7 +14,7 @@ export default function SearchPage() {
 
   const { status, data } = useQuery({
     queryKey: [examplesQKey, page, limit],
-    queryFn: () => fetchExamples({ page, limit }),
+    queryFn: () => fetchExamples({ page, limit, q: '' }),
     staleTime: 1000,
   });
 
@@ -22,7 +22,7 @@ export default function SearchPage() {
     const newPage = page + 1;
     queryClient.prefetchQuery({
       queryKey: [examplesQKey, newPage, limit],
-      queryFn: () => fetchExamples({ page: newPage, limit }),
+      queryFn: () => fetchExamples({ page: newPage, limit, q: '' }),
     });
   }, [data, page, queryClient]);
 

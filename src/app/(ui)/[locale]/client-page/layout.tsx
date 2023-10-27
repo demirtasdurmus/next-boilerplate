@@ -9,7 +9,10 @@ export default function SubLayout({
   children: ReactElement;
 }) {
   return (
-    <I18nProviderClient locale={locale} fallback={<div>Fallback</div>}>
+    <I18nProviderClient
+      locale={locale}
+      fallback={<div>Fallback For Localization</div>}
+    >
       {children}
     </I18nProviderClient>
   );

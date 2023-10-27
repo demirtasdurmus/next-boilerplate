@@ -1,52 +1,56 @@
+import { defaultGetExamplesLimit } from '@/app/(server)/api/examples/_schemas/get-examples.dto';
 import { TGetExamplesResponse } from '@/app/(server)/api/examples/route';
-import {
-  getCurrentLocale,
-  getI18n,
-  getScopedI18n,
-} from '@/locales/utils/server';
+import { getScopedI18n } from '@/locales/utils/server';
 import { fetchExamples } from '@/services/example.service';
-import Pagination from './pagination';
+import { notFound } from 'next/navigation';
+import ExampleCard from './components/example-card';
+import Pagination from './components/pagination';
 
 type Props = {
   searchParams: {
-    page: number;
-    limit: number;
-    q: string;
+    page: number | undefined;
+    limit: number | undefined;
+    q: string | undefined;
   };
 };
 
-const limit = 2;
-
 export default async function Products({ searchParams }: Props) {
-  /* Localization Utils */
-  const locale = getCurrentLocale();
-  const t = await getI18n();
-  const scopedT = await getScopedI18n('hello');
+  const st = await getScopedI18n('ServerPage');
+  const { page = 1, limit = defaultGetExamplesLimit, q = '' } = searchParams;
 
-  /* Others */
-  const page = searchParams.page || 1;
-  const q = searchParams.q || '';
-
-  let products: TGetExamplesResponse['data'] = [];
-  products = await fetchExamples({ page, limit, q });
+  let examples: TGetExamplesResponse['data'] = [];
+  let meta: TGetExamplesResponse['meta'];
+  try {
+    const res = await fetchExamples({ page, limit, q });
+    examples = res.data;
+    meta = res.meta;
+  } catch (error: any) {
+    if (error.status === 'fail') return notFound();
+    throw error;
+  }
 
   return (
-    <div className="mx-24 mt-12 flex flex-col gap-8">
-      <h1 className="text-xl">{JSON.stringify(products)}</h1>
-      {/* Localization Example */}
-      <div>
-        <p className="text-3xl">Current locale: {locale}</p>
-        <p>{t('hello.world', { param: 'John' })}</p>
-        <p>{scopedT('nested.translations')}</p>
-        <p>{t('hello.world', { param: <strong>John</strong> })}</p>
-        {/* Output: No cows */}
-        <p>{t('apples', { count: 0 })}</p>
-        {/* Output: A cow */}
-        <p>{t('apples', { count: 1 })}</p>
-        {/* Output: 3 cows */}
-        <p>{t('apples', { count: 3 })}</p>
+    <div className="mx-24 my-12 flex flex-col items-center gap-8">
+      {/* Title */}
+      <h1 className="text-3xl">{st('title')}</h1>
+
+      {/* Examples */}
+      <div className="flex w-full flex-wrap justify-center gap-8">
+        {examples.map((example, idx) => (
+          <ExampleCard
+            idx={idx}
+            id={example.id}
+            key={example.id}
+            title={example.title}
+            imageUri=""
+            width={200}
+            height={120}
+          />
+        ))}
       </div>
-      <Pagination />
+
+      {/* Pagination */}
+      <Pagination hasMore={meta.hasMore} totalPages={meta.totalPages} />
     </div>
   );
 }

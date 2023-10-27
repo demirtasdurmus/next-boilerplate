@@ -5,7 +5,8 @@ import {
   registerDto,
 } from '@/app/(server)/api/auth/_dto/register.dto';
 import { TRegisterResponse } from '@/app/(server)/api/auth/register/route';
-import { Button, Input } from '@/components/shared';
+import { Button } from '@/components/shared/button';
+import { Input } from '@/components/shared/input';
 import { register } from '@/services/auth.service';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
@@ -27,7 +28,7 @@ export default function Register() {
 
   const { mutate: mutateRegister, status } = useMutation({
     mutationFn: (data: TRegisterDto) => register(data),
-    onSuccess: (metadata: TRegisterResponse['metadata']) => {
+    onSuccess: (metadata: TRegisterResponse['meta']) => {
       router.push('/login');
       toast.success(metadata.message);
     },

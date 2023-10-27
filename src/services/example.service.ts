@@ -5,15 +5,7 @@ import { HttpClient } from '@/lib/http-client';
 
 const httpClient = new HttpClient({ modulePrefix: 'examples' });
 
-export async function fetchExamples({
-  page,
-  limit,
-  q,
-}: {
-  page: number;
-  limit: number;
-  q?: string;
-}) {
+export async function fetchExamples({ page, limit, q }: TGetExamplesDto & {}) {
   return httpClient
     .get<TGetExamplesResponse>({
       url: '/',
@@ -23,7 +15,7 @@ export async function fetchExamples({
         q,
       } satisfies TGetExamplesDto,
     })
-    .then((res) => res.data.data);
+    .then((res) => res.data);
 }
 
 export async function fetchExampleById(id: string) {

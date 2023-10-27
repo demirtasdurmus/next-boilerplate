@@ -44,8 +44,8 @@ async function registerHandler(
   //   .where(eq(schemas.users.id, '01ea2e89-a3fc-43c4-97fc-a83451110cb4'));
 
   return buildCreatedResponse({
-    data: {},
-    metadata: {
+    data: null,
+    meta: {
       message: 'User register successful',
     },
   });

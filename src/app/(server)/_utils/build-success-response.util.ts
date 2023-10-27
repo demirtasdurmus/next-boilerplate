@@ -1,24 +1,24 @@
 import { NextResponse } from 'next/server';
 
-export type TSuccessResponse<TData = unknown, TMetadata = unknown> = {
+export type TSuccessResponse<TData = unknown, TMeta = unknown> = {
   data: TData;
-  metadata: TMetadata;
+  meta: TMeta;
 };
 
-export function buildSuccessResponse<TData = unknown, TMetadata = unknown>({
+export function buildSuccessResponse<TData = unknown, TMeta = unknown>({
   status,
   data,
-  metadata,
+  meta,
 }: {
   status: number;
   data: TData;
-  metadata: TMetadata;
-}): NextResponse<TSuccessResponse<TData, TMetadata>> {
+  meta: TMeta;
+}): NextResponse<TSuccessResponse<TData, TMeta>> {
   return new NextResponse(
     JSON.stringify({
       data,
-      metadata,
-    } satisfies TSuccessResponse<TData, TMetadata>),
+      meta,
+    } satisfies TSuccessResponse<TData, TMeta>),
     {
       status,
       headers: {
@@ -28,40 +28,38 @@ export function buildSuccessResponse<TData = unknown, TMetadata = unknown>({
   );
 }
 
-export function buildOkResponse<TData = unknown, TMetadata = unknown>({
+export function buildOkResponse<TData = unknown, TMeta = unknown>({
   data,
-  metadata,
+  meta,
 }: {
   data: TData;
-  metadata?: TMetadata;
+  meta: TMeta;
 }) {
   return buildSuccessResponse({
     status: 200,
     data,
-    metadata: metadata || { message: 'success' },
+    meta,
   });
 }
 
-export function buildOkResponseWithMessage<TMetadata = unknown>(
-  metadata?: TMetadata,
-) {
+export function buildOkResponseWithMessage<TMeta = unknown>(meta?: TMeta) {
   return buildSuccessResponse({
     status: 200,
-    metadata: metadata || { message: 'success' },
+    meta: meta || { message: 'success' },
     data: {},
   });
 }
 
-export function buildCreatedResponse<TData = unknown, TMetadata = unknown>({
+export function buildCreatedResponse<TData = unknown, TMeta = unknown>({
   data,
-  metadata,
+  meta,
 }: {
   data: TData;
-  metadata?: TMetadata;
+  meta: TMeta;
 }) {
   return buildSuccessResponse({
     status: 201,
     data,
-    metadata: metadata || { message: 'created' },
+    meta,
   });
 }

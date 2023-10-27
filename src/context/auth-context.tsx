@@ -44,7 +44,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   const { mutate: mutateLogout } = useMutation({
     mutationFn: () => logout(),
-    onSuccess: (metadata: TLogoutResponse['metadata']) => {
+    onSuccess: (metadata: TLogoutResponse['meta']) => {
       setSession(null);
       toast.success(metadata.message);
     },

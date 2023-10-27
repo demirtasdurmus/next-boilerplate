@@ -4,7 +4,7 @@
 
 # Add 'root' label to any root file changes
 root:
-  - "*"
+  - '*'
   - .github/**
   - .husky/**
   - .vscode/**
@@ -25,7 +25,6 @@ api:
   - src/app/api/_types/**
   - src/app/api/_utils/**
   - src/app/api/(modules)/**
-
 
 # # Add 'i18n' label to any change within the 'messages'
 # i18n:

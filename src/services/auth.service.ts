@@ -25,7 +25,7 @@ export async function register({
         confirmPassword,
       } satisfies TRegisterDto,
     })
-    .then((res) => res.data.metadata);
+    .then((res) => res.data.meta);
 }
 
 export async function login({
@@ -43,7 +43,7 @@ export async function login({
         password,
       } satisfies TLoginDto,
     })
-    .then((res) => res.data.metadata);
+    .then((res) => res.data.meta);
 }
 
 export async function logout() {
@@ -51,7 +51,7 @@ export async function logout() {
     .post<TLogoutResponse>({
       url: '/logout',
     })
-    .then((res) => res.data.metadata);
+    .then((res) => res.data.meta);
 }
 
 export async function fetchMe() {
