@@ -36,13 +36,10 @@ export default async function Products({ searchParams }: Props) {
 
       {/* Examples */}
       <div className="flex w-full flex-wrap justify-center gap-8">
-        {examples.map((example, idx) => (
+        {examples.map((example) => (
           <ExampleCard
-            idx={idx}
-            id={example.id}
             key={example.id}
-            title={example.title}
-            imageUri=""
+            example={example}
             width={200}
             height={120}
           />

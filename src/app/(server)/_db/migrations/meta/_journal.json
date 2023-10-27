@@ -1,40 +1,19 @@
 {
-  "version": "5",
+  "version": "0",
   "dialect": "pg",
   "entries": [
     {
       "idx": 0,
       "version": "5",
-      "when": 1695100876473,
-      "tag": "0000_absurd_mindworm",
+      "when": 1698427624354,
+      "tag": "0000_massive_whizzer",
       "breakpoints": true
     },
     {
       "idx": 1,
       "version": "5",
-      "when": 1695619603993,
-      "tag": "0001_complex_senator_kelly",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "5",
-      "when": 1695877388156,
-      "tag": "0002_natural_tiger_shark",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "5",
-      "when": 1695878476884,
-      "tag": "0003_milky_baron_strucker",
-      "breakpoints": true
-    },
-    {
-      "idx": 4,
-      "version": "5",
-      "when": 1696410511047,
-      "tag": "0004_married_pixie",
+      "when": 1698431173988,
+      "tag": "0001_short_songbird",
       "breakpoints": true
     }
   ]

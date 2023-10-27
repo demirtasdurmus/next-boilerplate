@@ -1,8 +1,8 @@
 /* eslint-disable import/no-cycle */
+import chalk from 'chalk';
 import { NextHandler } from 'next-connect';
 import { NextRequest } from 'next/server';
 import { IBaseRequestContext } from '../_routers/base.router';
-import { logger } from '../_utils/logger.util';
 
 export async function loggerMiddleware(
   req: NextRequest,
@@ -11,8 +11,14 @@ export async function loggerMiddleware(
 ): Promise<void> {
   if (process.env.NODE_ENV !== 'development') return next();
 
-  const { method, url } = req;
-  const log = `[${method}] ${url}`;
-  logger.info(log);
+  const time = new Date().toLocaleString();
+
+  const {
+    method,
+    nextUrl: { pathname, protocol },
+  } = req;
+  const log = `${protocol.slice(0, -1)} - [${method}] - ${pathname} - ${time}`;
+  // eslint-disable-next-line no-console
+  console.log(`${chalk.green(log)}`);
   return next();
 }
