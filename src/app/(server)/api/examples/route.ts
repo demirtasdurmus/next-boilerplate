@@ -36,6 +36,7 @@ export type TGetExamplesResponse = TSuccessResponse<
   {
     id: string;
     title: string;
+    imageUrl: string | null;
     user: {
       id: string;
       username: string;
@@ -80,7 +81,7 @@ async function getExamplesHandler(
     .select({
       id: examples.id,
       title: examples.title,
-      description: examples.description,
+      imageUrl: examples.imageUrl,
       user: {
         id: users.id,
         username: users.username,

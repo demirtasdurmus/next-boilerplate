@@ -1,5 +1,6 @@
 import * as dotenv from 'dotenv';
 import { logger } from '../../_utils/logger.util';
+import { hashPassword } from '../../api/auth/_utils/hash-password.util';
 import { DrizzleClient } from '../drizzle-client';
 import * as schemas from '../schema';
 
@@ -35,7 +36,7 @@ const words = [
 const examples = Array.from({ length: 20 }, (_, i) => ({
   title: `${words[i]} example`,
   description: `Description will be a little bit longer ${words[i]}`,
-  imageUrl: `https://picsum.photos/200/300?random=${i + 1}`,
+  imageUrl: `https://picsum.photos/300/200?random=${i + 1}`,
 }));
 
 async function seed() {
@@ -47,7 +48,7 @@ async function seed() {
     .values({
       username: 'john',
       email: 'john@email.com',
-      password: 'Password123!',
+      password: await hashPassword('Password123!'),
     })
     .returning();
 

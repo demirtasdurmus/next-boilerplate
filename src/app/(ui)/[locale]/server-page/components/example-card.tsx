@@ -1,22 +1,17 @@
 'use client';
 
+import { TGetExamplesResponse } from '@/app/(server)/api/examples/route';
 import ImageLoader from '@/components/shared/image-loader';
 import Link from 'next/link';
 
 type Props = {
-  idx: number;
-  id: string;
-  title: string;
-  imageUri: string;
+  example: TGetExamplesResponse['data'][0];
   width: number;
   height: number;
 };
 
 export default function ExampleCard({
-  idx,
-  id,
-  title,
-  imageUri,
+  example: { id, title, imageUrl, user },
   width,
   height,
 }: Props) {
@@ -31,12 +26,17 @@ export default function ExampleCard({
         title={title}
         width={width}
         height={height}
-        src={
-          imageUri || `https://picsum.photos/${width}/${height}?random=${idx}`
-        }
+        src={imageUrl || ''}
       />
       {/* Title */}
       <p className="mt-2">{title}</p>
+      {/* User */}
+      <div className="mt-2 flex items-center gap-3">
+        <div className="h-[20px] w-[20px] rounded-full bg-blue-600">
+          {/* For profile image */}
+        </div>
+        {user.username}
+      </div>
     </Link>
   );
 }
