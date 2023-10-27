@@ -24,6 +24,12 @@ export type TGetExampleByIdResponse = TSuccessResponse<{
   id: string;
   title: string;
   description: string | null;
+  imageUrl: string | null;
+  createdAt: Date;
+  user: {
+    id: string;
+    username: string;
+  } | null;
 }>;
 
 export type TGenericResponse = TSuccessResponse<unknown, { message: string }>;
@@ -34,6 +40,21 @@ async function getOneById(
 ): Promise<NextResponse<TGetExampleByIdResponse>> {
   const data = await db.query.examples.findFirst({
     where: eq(examples.id, ctx.params.id),
+    columns: {
+      id: true,
+      title: true,
+      description: true,
+      imageUrl: true,
+      createdAt: true,
+    },
+    with: {
+      user: {
+        columns: {
+          id: true,
+          username: true,
+        },
+      },
+    },
   });
 
   if (!data) {

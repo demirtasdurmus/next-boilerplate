@@ -1,5 +1,6 @@
 /* eslint-disable import/no-cycle */
 import { isLoggedInMiddleware } from '../_middlewares/is-logged-in.middleware';
+import { TSession } from '../_types/session.type';
 import { IBaseRequestContext, baseRouter } from './base.router';
 
 export interface IProtectedRequestContext<
@@ -10,8 +11,7 @@ export interface IProtectedRequestContext<
   payload: TPayload;
   params: TParams;
   queryParams: TQueryParams;
-  // TODO: Add session type
-  session: Record<string, string>;
+  session: TSession;
 }
 
 /**

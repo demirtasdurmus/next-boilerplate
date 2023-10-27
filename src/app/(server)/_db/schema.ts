@@ -1,16 +1,20 @@
-import { boolean, date, jsonb, pgTable, text, uuid } from 'drizzle-orm/pg-core';
+import { relations } from 'drizzle-orm';
+import {
+  boolean,
+  jsonb,
+  pgTable,
+  text,
+  timestamp,
+  uuid,
+} from 'drizzle-orm/pg-core';
 
-export const examples = pgTable('examples', {
-  id: uuid('id').primaryKey().defaultRandom(),
-  title: text('title').notNull(),
-  description: text('description'),
-});
-
+// types
 export enum Role {
   USER = 'USER',
   ADMIN = 'ADMIN',
 }
 
+// tables
 export const users = pgTable('users', {
   id: uuid('id').primaryKey().defaultRandom(),
   username: text('username').notNull(),
@@ -19,7 +23,28 @@ export const users = pgTable('users', {
   roles: jsonb('roles').notNull().default(`["${Role.USER}"]`).$type<Role[]>(),
   isVerified: boolean('is_verified').notNull().default(false),
   verificationToken: text('verification_token'),
-  verificationTokenExpiresAt: date('verification_token_expires_at'),
-  createdAt: date('created_at').notNull().default('now()'),
-  updatedAt: date('updated_at').notNull().default('now()'),
+  verificationTokenExpiresAt: timestamp('verification_token_expires_at'),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
 });
+
+export const examples = pgTable('examples', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  title: text('title').notNull(),
+  description: text('description'),
+  imageUrl: text('image_url'),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
+  userId: uuid('user_id')
+    .notNull()
+    .references(() => users.id),
+});
+
+// relations
+export const userRelations = relations(users, ({ many }) => ({
+  examples: many(examples),
+}));
+
+export const exampleRelations = relations(examples, ({ one }) => ({
+  user: one(users),
+}));

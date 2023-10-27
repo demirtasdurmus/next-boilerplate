@@ -80,7 +80,6 @@ export default function ClientPage() {
               <Link href={`/client-page/${item.id}`} className="font-bold">
                 {item.title}
               </Link>
-              <p>{item.description}</p>
             </div>
           ))}
       </div>

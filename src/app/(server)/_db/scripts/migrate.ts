@@ -2,6 +2,7 @@ import * as dotenv from 'dotenv';
 import { drizzle } from 'drizzle-orm/postgres-js';
 import { migrate } from 'drizzle-orm/postgres-js/migrator';
 import postgres from 'postgres';
+import drizzleConfig from '../../../../../drizzle.config';
 import { InternalServerError } from '../../_errors/internal-server.error';
 import { logger } from '../../_utils/logger.util';
 
@@ -16,7 +17,7 @@ if (!dbUrl) {
 const migrationClient = postgres(dbUrl, { max: 1 });
 
 migrate(drizzle(migrationClient), {
-  migrationsFolder: './src/app/api/_db/migrations',
+  migrationsFolder: drizzleConfig.out,
 })
   .then(() => {
     logger.info('Migration completed');

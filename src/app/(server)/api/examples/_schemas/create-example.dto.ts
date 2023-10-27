@@ -7,6 +7,7 @@ export const createExampleDto = z.object(
       invalid_type_error: 'Title must be a string',
     }),
     description: z.string().optional(),
+    imageUrl: z.string().optional(),
   },
   {
     required_error: 'Body is required',

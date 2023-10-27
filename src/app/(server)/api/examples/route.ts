@@ -1,9 +1,13 @@
-import { ilike, or, sql } from 'drizzle-orm';
+import { eq, ilike, or, sql } from 'drizzle-orm';
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '../../_db';
-import { examples } from '../../_db/schema';
+import { examples, users } from '../../_db/schema';
 import { parseRequestBodyMiddleware } from '../../_middlewares/parse-request-body.middleware';
 import { parseRequestQueryParamsMiddleware } from '../../_middlewares/parse-request-query-params.middleware';
+import {
+  IProtectedRequestContext,
+  protectedRouter,
+} from '../../_routers/protected.router';
 import {
   IPublicRequestContext,
   publicRouter,
@@ -23,13 +27,19 @@ export type TCreateExampleResponse = TSuccessResponse<{
   id: string;
   title: string;
   description: string | null;
+  imageUrl: string | null;
+  createdAt: Date;
+  updatedAt: Date;
 }>;
 
 export type TGetExamplesResponse = TSuccessResponse<
   {
     id: string;
     title: string;
-    description: string | null;
+    user: {
+      id: string;
+      username: string;
+    };
   }[],
   {
     page: number;
@@ -40,9 +50,19 @@ export type TGetExamplesResponse = TSuccessResponse<
 
 async function createExampleHandler(
   _req: NextRequest,
-  ctx: IPublicRequestContext<TCreateExampleDto>,
+  ctx: IProtectedRequestContext<TCreateExampleDto>,
 ): Promise<NextResponse<TCreateExampleResponse>> {
-  const data = await db.insert(examples).values(ctx.payload).returning();
+  const data = await db
+    .insert(examples)
+    .values({ ...ctx.payload, userId: ctx.session.id })
+    .returning({
+      id: examples.id,
+      title: examples.title,
+      description: examples.description,
+      imageUrl: examples.imageUrl,
+      createdAt: examples.createdAt,
+      updatedAt: examples.updatedAt,
+    });
 
   return buildCreatedResponse({
     data: data[0],
@@ -61,6 +81,10 @@ async function getExamplesHandler(
       id: examples.id,
       title: examples.title,
       description: examples.description,
+      user: {
+        id: users.id,
+        username: users.username,
+      },
     })
     .from(examples)
     .where(
@@ -69,6 +93,7 @@ async function getExamplesHandler(
         ilike(examples.description, `%${ctx.queryParams.q}%`),
       ),
     )
+    .innerJoin(users, eq(examples.userId, users.id))
     .limit(ctx.queryParams.limit)
     .offset(offset);
 
@@ -86,7 +111,7 @@ async function getExamplesHandler(
   });
 }
 
-const createRouter = publicRouter<TCreateExampleDto>()
+const createRouter = protectedRouter<TCreateExampleDto>()
   .use(parseRequestBodyMiddleware(createExampleDto))
   .post(createExampleHandler);
 
@@ -96,7 +121,7 @@ const getAllRouter = publicRouter<unknown, unknown, TGetExamplesDto>()
 
 export function POST(
   req: NextRequest,
-  ctx: IPublicRequestContext<TCreateExampleDto>,
+  ctx: IProtectedRequestContext<TCreateExampleDto>,
 ) {
   return createRouter.run(req, ctx);
 }
