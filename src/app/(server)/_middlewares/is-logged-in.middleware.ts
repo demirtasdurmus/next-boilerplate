@@ -8,7 +8,7 @@ export async function isLoggedInMiddleware(
   _req: NextRequest,
   ctx: IProtectedRequestContext,
   next: NextHandler,
-) {
+): Promise<void> {
   const session = { id: 'session-id' };
 
   if (session.id !== 'session-id') {

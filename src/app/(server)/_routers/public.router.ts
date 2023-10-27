@@ -1,9 +1,4 @@
-/* eslint-disable import/no-cycle */
-import { createEdgeRouter } from 'next-connect';
-import { NextRequest } from 'next/server';
-import { handleGlobalErrorMiddleware } from '../_middlewares/handle-global-error.middleware';
-import { parseJsonMiddleware } from '../_middlewares/parse-json.middleware';
-import { IBaseRequestContext } from './base-request-context.interface';
+import { IBaseRequestContext, baseRouter } from './base.router';
 
 export interface IPublicRequestContext<
   TPayload = unknown,
@@ -17,7 +12,6 @@ export interface IPublicRequestContext<
 
 /**
  * Creates a public router.
- * This router will handle global errors and parse the request body as JSON.
  *
  * @export
  * @template TPayload
@@ -30,10 +24,5 @@ export function publicRouter<
   TParams = unknown,
   TQueryParams = unknown,
 >() {
-  return createEdgeRouter<
-    NextRequest,
-    IPublicRequestContext<TPayload, TParams, TQueryParams>
-  >()
-    .use(handleGlobalErrorMiddleware)
-    .use(parseJsonMiddleware);
+  return baseRouter<IPublicRequestContext<TPayload, TParams, TQueryParams>>();
 }

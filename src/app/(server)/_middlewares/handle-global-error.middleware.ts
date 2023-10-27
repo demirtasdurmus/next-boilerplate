@@ -1,8 +1,9 @@
+/* eslint-disable import/no-cycle */
 import { NextHandler } from 'next-connect';
 import { NextRequest } from 'next/server';
 import { BaseError } from '../_errors/base.error';
 import { serializeError } from '../_errors/serialize-error.util';
-import { IBaseRequestContext } from '../_routers/base-request-context.interface';
+import { IBaseRequestContext } from '../_routers/base.router';
 import { buildErrorResponse } from '../_utils/build-error-response.util';
 
 /**

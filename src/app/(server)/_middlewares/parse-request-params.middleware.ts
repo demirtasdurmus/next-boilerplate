@@ -1,7 +1,7 @@
 import { NextHandler } from 'next-connect';
 import { NextRequest } from 'next/server';
 import { z } from 'zod';
-import { IBaseRequestContext } from '../_routers/base-request-context.interface';
+import { IBaseRequestContext } from '../_routers/base.router';
 import { TMiddlewareHandler } from '../_types/middleware-handler.type';
 import { parseObject } from '../_utils/parse-object.util';
 
