@@ -1,4 +1,8 @@
 export default {
+  ServerPage: {
+    title: 'Server Sayfası',
+    description: 'Bu bir sunucu tarafından oluşturulmuş sayfadır',
+  },
   hello: {
     world: 'Merhaba {param}!',
     nested: {

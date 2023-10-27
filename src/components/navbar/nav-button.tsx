@@ -1,10 +1,11 @@
-import { useAuthContext } from '@/context';
+import { AuthContext } from '@/context/auth-context';
 import clsx from 'clsx';
 import Link from 'next/link';
+import { useContext } from 'react';
 import { BeatLoader } from 'react-spinners';
 
 export default function NavButton() {
-  const { loading, session, logout } = useAuthContext();
+  const { loading, session, logout } = useContext(AuthContext);
 
   const buttonClassName = clsx(
     'hidden',

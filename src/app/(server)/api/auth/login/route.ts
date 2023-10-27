@@ -74,8 +74,8 @@ async function loginHandler(
 
   // create a next response
   const res = buildOkResponse({
-    data: {},
-    metadata: {
+    data: undefined,
+    meta: {
       message: 'User login successful',
     },
   });

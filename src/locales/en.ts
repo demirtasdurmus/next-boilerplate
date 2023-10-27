@@ -1,4 +1,8 @@
 export default {
+  ServerPage: {
+    title: 'Server Page',
+    description: 'This is a server side rendered page',
+  },
   hello: {
     world: 'Hello {param}!',
     nested: {

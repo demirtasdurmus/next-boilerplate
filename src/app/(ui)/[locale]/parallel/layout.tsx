@@ -1,6 +1,7 @@
 'use client';
 
-import { useAuthContext } from '@/context';
+import { AuthContext } from '@/context/auth-context';
+import { useContext } from 'react';
 
 export default function Layout({
   children,
@@ -15,7 +16,7 @@ export default function Layout({
   authenticated: React.ReactNode;
   unauthenticated: React.ReactNode;
 }) {
-  const { loading, session } = useAuthContext();
+  const { loading, session } = useContext(AuthContext);
   // eslint-disable-next-line no-nested-ternary
   const AuthComponent = loading ? (
     <div>Loading...</div>

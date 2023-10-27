@@ -21,8 +21,8 @@ async function logoutHandler(
   _ctx: IPublicRequestContext,
 ): Promise<NextResponse<TLogoutResponse>> {
   const res = buildOkResponse({
-    data: {},
-    metadata: {
+    data: undefined,
+    meta: {
       message: 'User logout successful',
     },
   });

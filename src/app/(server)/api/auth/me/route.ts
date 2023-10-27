@@ -29,6 +29,7 @@ async function meHandler(
   if (!authCookie) {
     return buildOkResponse({
       data: null,
+      meta: undefined,
     });
   }
 
@@ -38,6 +39,7 @@ async function meHandler(
   if (!valid) {
     return buildOkResponse({
       data: null,
+      meta: undefined,
     });
   }
 
@@ -55,12 +57,14 @@ async function meHandler(
   if (!user) {
     return buildOkResponse({
       data: null,
+      meta: undefined,
     });
   }
 
   // return user
   return buildOkResponse({
     data: user,
+    meta: undefined,
   });
 }
 

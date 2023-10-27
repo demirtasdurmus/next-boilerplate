@@ -3,13 +3,16 @@
     "clsx",
     "commitlint",
     "hookform",
+    "ilike",
     "nunito",
     "OPENAI",
+    "picsum",
     "Pinterest",
     "Rollbar",
     "tailwindcss",
     "tanstack",
-    "toastify"
+    "toastify",
+    "unoptimized"
   ],
   "tailwindCSS.experimental.classRegex": [
     ["clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]

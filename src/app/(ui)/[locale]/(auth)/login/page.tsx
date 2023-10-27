@@ -2,7 +2,8 @@
 
 import { TLoginDto, loginDto } from '@/app/(server)/api/auth/_dto/login.dto';
 import { TLoginResponse } from '@/app/(server)/api/auth/login/route';
-import { Button, Input } from '@/components/shared';
+import { Button } from '@/components/shared/button';
+import { Input } from '@/components/shared/input';
 import { login } from '@/services/auth.service';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
@@ -21,7 +22,7 @@ export default function LoginForm() {
 
   const { mutate: mutateLogin, status } = useMutation({
     mutationFn: (data: TLoginDto) => login(data),
-    onSuccess: (metadata: TLoginResponse['metadata']) => {
+    onSuccess: (metadata: TLoginResponse['meta']) => {
       // used this one over next router to hard refresh
       window.location.href = '/';
       toast.success(metadata.message);

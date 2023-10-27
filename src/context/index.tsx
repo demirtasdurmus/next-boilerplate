@@ -18,5 +18,3 @@ export default function Context({ children }: Props) {
     </QueryClientProvider>
   );
 }
-
-export { useAuthContext } from './auth-context';

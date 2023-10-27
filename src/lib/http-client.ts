@@ -26,7 +26,12 @@ export class HttpClient {
     } catch (err: any) {
       if (err.response) {
         const error = err.response.data as TErrorResponse;
-        throw new Error(error.errorMessage);
+        // eslint-disable-next-line @typescript-eslint/no-throw-literal
+        throw {
+          message: error.errorMessage,
+          status: error.status,
+          statusCode: error.statusCode,
+        };
       }
       throw err;
     }
