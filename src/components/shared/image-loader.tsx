@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import Image from 'next/image';
 
 type Props = {
@@ -20,7 +21,7 @@ export default function ImageLoader({
       width={width}
       height={height}
       src={src}
-      className={className}
+      className={clsx('h-auto w-auto rounded-lg', className)}
       loader={() => src}
       alt={title}
       unoptimized

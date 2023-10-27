@@ -15,9 +15,12 @@ export async function loggerMiddleware(
 
   const {
     method,
-    nextUrl: { pathname, protocol },
+    nextUrl: { pathname, protocol, search },
   } = req;
-  const log = `${protocol.slice(0, -1)} - [${method}] - ${pathname} - ${time}`;
+  const log = `${protocol.slice(
+    0,
+    -1,
+  )} - [${method}] - ${pathname}${search} - ${time}`;
   // eslint-disable-next-line no-console
   console.log(`${chalk.green(log)}`);
   return next();
