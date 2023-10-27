@@ -1,6 +1,7 @@
+/* eslint-disable import/no-cycle */
 import { NextHandler } from 'next-connect';
 import { NextRequest } from 'next/server';
-import { IBaseRequestContext } from '../_routers/base-request-context.interface';
+import { IBaseRequestContext } from '../_routers/base.router';
 
 /**
  * Parses the request body as JSON and attaches it to the ctx object.

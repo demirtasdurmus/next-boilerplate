@@ -1,10 +1,6 @@
 /* eslint-disable import/no-cycle */
-import { createEdgeRouter } from 'next-connect';
-import { NextRequest } from 'next/server';
-import { handleGlobalErrorMiddleware } from '../_middlewares/handle-global-error.middleware';
 import { isLoggedInMiddleware } from '../_middlewares/is-logged-in.middleware';
-import { parseJsonMiddleware } from '../_middlewares/parse-json.middleware';
-import { IBaseRequestContext } from './base-request-context.interface';
+import { IBaseRequestContext, baseRouter } from './base.router';
 
 export interface IProtectedRequestContext<
   TPayload = unknown,
@@ -20,8 +16,6 @@ export interface IProtectedRequestContext<
 
 /**
  * Creates a protected router.
- * This router will handle global errors and parse the request body as JSON.
- * It will also check if the user is logged in.
  *
  * @export
  * @template TPayload
@@ -34,12 +28,7 @@ export function protectedRouter<
   TParams = unknown,
   TQueryParams = unknown,
 >() {
-  return createEdgeRouter<
-    NextRequest,
+  return baseRouter<
     IProtectedRequestContext<TPayload, TParams, TQueryParams>
-  >()
-    .use(handleGlobalErrorMiddleware)
-    .use(parseJsonMiddleware)
-    .use(isLoggedInMiddleware);
-  // TODO: Add session middleware
+  >().use(isLoggedInMiddleware);
 }
