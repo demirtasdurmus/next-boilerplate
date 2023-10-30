@@ -54,7 +54,9 @@ export default async function Products({ searchParams }: Props) {
       </div>
 
       {/* Pagination */}
-      <Pagination hasMore={meta.hasMore} totalPages={meta.totalPages} />
+      {q !== '' && (
+        <Pagination hasMore={meta.hasMore} totalPages={meta.totalPages} />
+      )}
     </div>
   );
 }
