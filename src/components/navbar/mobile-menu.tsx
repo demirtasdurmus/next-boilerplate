@@ -20,7 +20,7 @@ export default function MobileMenu({ menuItems }: Props) {
   const { loading, session, logout } = useContext(AuthContext);
 
   return (
-    <div className="absolute left-6 right-6 mt-10 flex flex-col items-center space-y-6 self-end bg-white py-8 font-bold drop-shadow-md sm:w-auto sm:self-center md:hidden">
+    <div className="absolute left-6 right-6 z-30 mt-10 flex flex-col items-center space-y-6 self-end bg-white py-8 font-bold drop-shadow-md sm:w-auto sm:self-center md:hidden">
       {menuItems.map((item) => (
         <Link
           href={item.href}
