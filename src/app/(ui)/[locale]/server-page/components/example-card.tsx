@@ -11,13 +11,13 @@ type Props = {
 };
 
 export default function ExampleCard({
-  example: { id, title, imageUrl, user },
+  example: { id, slug, title, imageUrl, user },
   width,
   height,
 }: Props) {
   return (
     <Link
-      href={`server-page/${id}`}
+      href={`server-page/${slug}/${id}`}
       className="rounded-lg border-2 bg-gray-200 p-3"
     >
       {/* Image */}

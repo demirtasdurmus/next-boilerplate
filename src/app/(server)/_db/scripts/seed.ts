@@ -1,4 +1,5 @@
 import * as dotenv from 'dotenv';
+import { generateSlug } from '../../_utils/generate-slug.util';
 import { logger } from '../../_utils/logger.util';
 import { hashPassword } from '../../api/auth/_utils/hash-password.util';
 import { DrizzleClient } from '../drizzle-client';
@@ -36,11 +37,25 @@ const words = [
 const getRandomNumber = (to: number) => Math.floor(Math.random() * to);
 
 // create an array of 20 with random text and images uris from picsum
-const examples = Array.from({ length: 20 }, (_, i) => ({
-  title: `${words[getRandomNumber(20)]} ${words[getRandomNumber(20)]}`,
-  description: `Description will be a little bit longer`,
-  imageUrl: `https://picsum.photos/300/200?random=${i + 1}`,
-}));
+const examples = Array.from({ length: 20 }, (_, i) => {
+  const title = `${words[getRandomNumber(20)]} ${
+    words[getRandomNumber(20)]
+  } ${getRandomNumber(100)}`;
+  return {
+    title,
+    slug: generateSlug(title),
+    description: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
+    molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
+    numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
+    optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis
+    obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam
+    nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit,
+    tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit,
+    quia. Quo neque error repudiandae fuga? Ipsa laudantium molestias eos 
+    sapiente officiis modi at sunt excepturi expedita sint? Sed qu`,
+    imageUrl: `https://picsum.photos/300/200?random=${i + 1}`,
+  };
+});
 
 (async function seed() {
   await db.delete(schemas.examples);

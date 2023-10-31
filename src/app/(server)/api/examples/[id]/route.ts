@@ -29,7 +29,7 @@ export type TGetExampleByIdResponse = TSuccessResponse<{
   user: {
     id: string;
     username: string;
-  } | null;
+  };
 }>;
 
 export type TGenericResponse = TSuccessResponse<unknown, { message: string }>;
