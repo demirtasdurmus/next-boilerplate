@@ -32,10 +32,13 @@ const words = [
   'boxcar',
 ];
 
+// create a function to get a random number between 0 and 20
+const getRandomNumber = (to: number) => Math.floor(Math.random() * to);
+
 // create an array of 20 with random text and images uris from picsum
 const examples = Array.from({ length: 20 }, (_, i) => ({
-  title: `${words[i]} example`,
-  description: `Description will be a little bit longer ${words[i]}`,
+  title: `${words[getRandomNumber(20)]} ${words[getRandomNumber(20)]}`,
+  description: `Description will be a little bit longer`,
   imageUrl: `https://picsum.photos/300/200?random=${i + 1}`,
 }));
 
@@ -43,19 +46,26 @@ const examples = Array.from({ length: 20 }, (_, i) => ({
   await db.delete(schemas.examples);
   await db.delete(schemas.users);
 
-  const [user] = await db
+  const [userOne] = await db
     .insert(schemas.users)
-    .values({
-      username: 'john',
-      email: 'john@email.com',
-      password: await hashPassword('Password123!'),
-    })
+    .values([
+      {
+        username: 'john',
+        email: 'john@email.com',
+        password: await hashPassword('Password123!'),
+      },
+      {
+        username: 'jane',
+        email: 'jane@email.com',
+        password: await hashPassword('Password123!'),
+      },
+    ])
     .returning();
 
   await db.insert(schemas.examples).values(
     examples.map((example) => ({
       ...example,
-      userId: user.id,
+      userId: userOne.id,
     })),
   );
 })()
