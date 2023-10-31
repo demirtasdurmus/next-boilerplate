@@ -38,9 +38,7 @@ export default async function Products({ searchParams }: Props) {
       <h1 className="text-xl md:text-3xl">{st('title')}</h1>
       <SearchBar />
       <Examples examples={examples} />
-      {q !== '' && (
-        <Pagination hasMore={meta.hasMore} totalPages={meta.totalPages} />
-      )}
+      {q && <Pagination hasMore={meta.hasMore} totalPages={meta.totalPages} />}
     </div>
   );
 }
