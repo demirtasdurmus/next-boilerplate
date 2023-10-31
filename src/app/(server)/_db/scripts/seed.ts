@@ -1,4 +1,5 @@
 import * as dotenv from 'dotenv';
+import { generateSlug } from '../../_utils/generate-slug.util';
 import { logger } from '../../_utils/logger.util';
 import { hashPassword } from '../../api/auth/_utils/hash-password.util';
 import { DrizzleClient } from '../drizzle-client';
@@ -36,11 +37,17 @@ const words = [
 const getRandomNumber = (to: number) => Math.floor(Math.random() * to);
 
 // create an array of 20 with random text and images uris from picsum
-const examples = Array.from({ length: 20 }, (_, i) => ({
-  title: `${words[getRandomNumber(20)]} ${words[getRandomNumber(20)]}`,
-  description: `Description will be a little bit longer`,
-  imageUrl: `https://picsum.photos/300/200?random=${i + 1}`,
-}));
+const examples = Array.from({ length: 20 }, (_, i) => {
+  const title = `${words[getRandomNumber(20)]} ${
+    words[getRandomNumber(20)]
+  } ${getRandomNumber(100)}`;
+  return {
+    title,
+    slug: generateSlug(title),
+    description: `Description will be a little bit longer`,
+    imageUrl: `https://picsum.photos/300/200?random=${i + 1}`,
+  };
+});
 
 (async function seed() {
   await db.delete(schemas.examples);

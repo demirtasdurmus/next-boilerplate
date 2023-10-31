@@ -32,6 +32,7 @@ export const users = pgTable('users', {
 export const examples = pgTable('examples', {
   id: uuid('id').primaryKey().defaultRandom(),
   title: text('title').notNull(),
+  slug: text('slug').notNull().unique(),
   description: text('description'),
   imageUrl: text('image_url'),
   createdAt: timestamp('created_at').notNull().defaultNow(),

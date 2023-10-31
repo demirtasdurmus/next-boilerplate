@@ -17,6 +17,7 @@ import {
   buildCreatedResponse,
   buildOkResponse,
 } from '../../_utils/build-success-response.util';
+import { generateSlug } from '../../_utils/generate-slug.util';
 import {
   TCreateExampleDto,
   createExampleDto,
@@ -36,6 +37,7 @@ export type TGetExamplesResponse = TSuccessResponse<
   {
     id: string;
     title: string;
+    slug: string;
     imageUrl: string | null;
     user: {
       id: string;
@@ -55,7 +57,11 @@ async function createExampleHandler(
 ): Promise<NextResponse<TCreateExampleResponse>> {
   const data = await db
     .insert(examples)
-    .values({ ...ctx.payload, userId: ctx.session.id })
+    .values({
+      ...ctx.payload,
+      slug: generateSlug(ctx.payload.title),
+      userId: ctx.session.id,
+    })
     .returning({
       id: examples.id,
       title: examples.title,
@@ -81,6 +87,7 @@ async function getExamplesHandler(
     .select({
       id: examples.id,
       title: examples.title,
+      slug: examples.slug,
       imageUrl: examples.imageUrl,
       user: {
         id: users.id,
