@@ -75,7 +75,7 @@ const footerList = [
 
 export default function Footer() {
   return (
-    <footer className="bg-darkBlue">
+    <footer className="mt-auto bg-darkBlue">
       {/* Flex Container */}
       <div className="container mx-auto flex flex-col-reverse justify-between space-y-8 px-6 py-10 md:flex-row md:space-y-0">
         <LogoAndSocials socials={socials} />

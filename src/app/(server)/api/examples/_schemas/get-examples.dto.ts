@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const defaultGetExamplesLimit = 20;
+export const defaultGetExamplesLimit = 10;
 
 export const getExamplesDto = z.object({
   page: z.preprocess(

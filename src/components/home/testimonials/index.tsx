@@ -39,7 +39,7 @@ export default function Testimonials() {
       {/* Testimonial List */}
       <TestimonialList testimonialList={testimonials.testimonialList} />
       {/* Button */}
-      <LinkButton name="Get Started" href="/pricing" className="mt-16" />
+      <LinkButton name="Get Started" href="/pricing" className="my-16" />
     </section>
   );
 }

@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Props) {
   return (
     <html lang="en" className={clsx(fontNunito.variable, 'font-sans')}>
-      <body>
+      <body className="flex min-h-screen flex-col">
         <Context>{children}</Context>
         <Toast />
       </body>
