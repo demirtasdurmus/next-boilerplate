@@ -16,7 +16,6 @@ export default function ExampleCard({
   height,
 }: Props) {
   return (
-    /* Card Body */
     <Link
       href={`server-page/${id}`}
       className="rounded-lg border-2 bg-gray-200 p-3"

@@ -3,7 +3,7 @@ import { TGetExamplesResponse } from '@/app/(server)/api/examples/route';
 import { getScopedI18n } from '@/locales/utils/server';
 import { fetchExamples } from '@/services/example.service';
 import { notFound } from 'next/navigation';
-import ExampleCard from './components/example-card';
+import Examples from './components/examples';
 import Pagination from './components/pagination';
 import SearchBar from './components/search-bar';
 
@@ -34,26 +34,10 @@ export default async function Products({ searchParams }: Props) {
   }
 
   return (
-    <div className="mx-24 my-12 flex flex-col items-center gap-8">
-      {/* Title */}
-      <h1 className="text-3xl">{st('title')}</h1>
-
-      {/* Search Bar */}
+    <div className="mx-3 my-6 flex flex-col items-center gap-8 md:mx-6">
+      <h1 className="text-xl md:text-3xl">{st('title')}</h1>
       <SearchBar />
-
-      {/* Examples */}
-      <div className="flex w-full flex-wrap justify-center gap-8">
-        {examples.map((example) => (
-          <ExampleCard
-            key={example.id}
-            example={example}
-            width={200}
-            height={120}
-          />
-        ))}
-      </div>
-
-      {/* Pagination */}
+      <Examples examples={examples} />
       {q !== '' && (
         <Pagination hasMore={meta.hasMore} totalPages={meta.totalPages} />
       )}
