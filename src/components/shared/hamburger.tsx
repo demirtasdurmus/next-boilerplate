@@ -1,18 +1,11 @@
 import clsx from 'clsx';
-import { useState } from 'react';
 
 type Props = {
-  handleMobileMenuToggle: () => void;
+  isOpen: boolean;
+  toggle: () => void;
 };
 
-export default function HamburgerButton({ handleMobileMenuToggle }: Props) {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const handleButtonClick = () => {
-    setIsOpen(!isOpen);
-    handleMobileMenuToggle();
-  };
-
+export default function Hamburger({ isOpen, toggle }: Props) {
   return (
     <button
       className={clsx(
@@ -20,7 +13,7 @@ export default function HamburgerButton({ handleMobileMenuToggle }: Props) {
         isOpen ? 'open' : '',
       )}
       type="button"
-      onClick={handleButtonClick}
+      onClick={toggle}
     >
       <span className="hamburger-top">{/*  */}</span>
       <span className="hamburger-middle">{/*  */}</span>

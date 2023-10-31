@@ -1,6 +1,6 @@
 import { defaultGetExamplesLimit } from '@/app/(server)/api/examples/_schemas/get-examples.dto';
 import { TGetExamplesResponse } from '@/app/(server)/api/examples/route';
-import { getScopedI18n } from '@/locales/utils/server';
+// import { getScopedI18n } from '@/locales/utils/server';
 import { fetchExamples } from '@/services/example.service';
 import { notFound } from 'next/navigation';
 import Examples from './components/examples';
@@ -15,7 +15,7 @@ type Props = {
 };
 
 export default async function Products({ searchParams }: Props) {
-  const st = await getScopedI18n('ServerPage');
+  // const st = await getScopedI18n('ServerPage');
   const { page = 1, q = '' } = searchParams;
 
   let examples: TGetExamplesResponse['data'] = [];
@@ -35,7 +35,7 @@ export default async function Products({ searchParams }: Props) {
 
   return (
     <div className="mx-3 my-6 flex flex-col items-center gap-8 md:mx-6">
-      <h1 className="text-xl md:text-3xl">{st('title')}</h1>
+      {/* <h1 className="text-xl md:text-3xl">{st('title')}</h1> */}
       <SearchBar />
       <Examples examples={examples} />
       {q && <Pagination hasMore={meta.hasMore} totalPages={meta.totalPages} />}
