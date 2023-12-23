@@ -1,26 +1,8 @@
 {
-  "cSpell.words": [
-    "clsx",
-    "commitlint",
-    "hookform",
-    "ilike",
-    "nunito",
-    "OPENAI",
-    "picsum",
-    "Pinterest",
-    "Rollbar",
-    "tailwindcss",
-    "tanstack",
-    "toastify",
-    "unoptimized"
-  ],
   "tailwindCSS.experimental.classRegex": [
     ["clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
   ],
   "files.associations": {
     "*.css": "tailwindcss"
-  },
-  "editor.codeActionsOnSave": {
-    "source.organizeImports": "explicit"
   }
 }
