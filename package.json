@@ -55,6 +55,7 @@
     "@commitlint/cli": "^17.7.1",
     "@commitlint/config-conventional": "^17.7.0",
     "@commitlint/prompt-cli": "^17.7.1",
+    "@release-it/conventional-changelog": "^8.0.1",
     "@tanstack/eslint-plugin-query": "^4.36.1",
     "@types/bcrypt": "^5.0.0",
     "@types/node": "^20.6.0",
